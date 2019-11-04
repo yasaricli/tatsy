@@ -15,6 +15,14 @@ module.exports = {
     return app.post(url, callback);
   },
 
+  delete(url, callback) {
+    return app.post(url, callback);
+  },
+
+  put(url, callback) {
+    return app.post(url, callback);
+  },
+
   all() {
     return app.get('*', (req, res) => {
       return res.json({

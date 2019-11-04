@@ -11,9 +11,12 @@ const glob = require('glob');
 const config = require('tatsy-config');
 const logger = require('tatsy-logger');
 
-const _decodeFile = (f) => {
-  const file = fs.readFileSync(f, 'utf8');
-  return file;
+const _safeFileName = (name) => {
+  return name.replace('.js', '');
+}
+
+const _getFile = (f) => {
+  return fs.readFileSync(f, 'utf8');
 };
 
 const _clearBaseDir = (callback) => {
@@ -45,7 +48,7 @@ module.exports = (isStarted, success) => {
       const lines = [];
 
       // Main Start Add
-      lines.push(_decodeFile(_getTemplate('start')));
+      lines.push(_getFile(_getTemplate('start')));
 
       // Show started log
       if (isStarted) {
@@ -54,7 +57,7 @@ module.exports = (isStarted, success) => {
 
       files.forEach((f) => {
         const name = path.basename(f);
-        const content = _decodeFile(f);
+        const content = _getFile(f);
         const buildFile = `${config.filesDir}/${name}`;
 
         // save decoding file
@@ -69,7 +72,7 @@ module.exports = (isStarted, success) => {
 
         lines.push(`
 (() => {
-${content}
+${content}(tatsy, "${_safeFileName(name)}");
 })()
         `);
       });
@@ -80,7 +83,7 @@ ${content}
       }
 
       // Main End Add
-      lines.push(_decodeFile(_getTemplate('end')));
+      lines.push(_getFile(_getTemplate('end')));
 
       // main file
       fs.appendFileSync(`${config.buildDir}/main.js`, lines.join('\n'), 'utf8');
