@@ -42,7 +42,17 @@ module.exports = {
       });
 
       http.put(`/api/${url}/:_id`, (req, res) => {
-        return res.json(returnJSON('success', {}));
+        const { _id } = req.params;
+        const { body } = req;
+
+        // update
+        Model.findOneAndUpdate({ _id }, body, (err, data) => {
+          if (data) {
+            return res.json(returnSuccess(data));
+          }
+
+          return res.json(returnFail(_id));
+        })
       });
 
       http.delete(`/api/${url}/:_id`, (req, res) => {
