@@ -1,28 +1,11 @@
-const returnJSON = (status, data) => {
-  return {
-    status,
-    data
+const apiUrl = (name, _id) => {
+  if (_id) {
+    return `/api/${name}/:${_id}`; 
   }
-};
 
-const returnSuccess = (data) => {
-  return {
-    status: 'success',
-    data
-  }
-};
-
-const returnFail = (name, data) => {
-  return {
-    status: 'fail',
-    data: {
-      message: `${name} not found`
-    }
-  }
+  return `/api/${name}`; 
 };
 
 module.exports = {
-  returnJSON,
-  returnSuccess,
-  returnFail
+  apiUrl
 }
