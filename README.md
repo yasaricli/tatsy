@@ -31,16 +31,16 @@ and then just run `yarn start` and go to http://localhost:3000/api
 ## Defining Collection Routes
 One of the most common uses for a REST API is exposing a set of operations on your collections.
 All available REST endpoints can be generated for a Mongo Collection using
-`Tatsy.addCollection()`.
+`Tatsy.addCollection(name, options)`.
 
 ```javascript
-// posts.js | Given a URL "/posts/5"
-Totsy.addCollection({
-  name: 'posts', // Mongo Collection name
+// articles.js | Given a URL "/articles/5"
+Tatsy.addCollection('articles', {
   schema: {
-    title: String
+    title: String,
+    author: String
   }
-});
+})
 ```
 
 **`/api/<collection>`**
