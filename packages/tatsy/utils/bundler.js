@@ -8,8 +8,8 @@ const mkdirp = require('mkdirp');
 const glob = require('glob');
 
 // Official packages
-const config = require('tat-config');
-const logger = require('tat-logger');
+const config = require('tatsy-config');
+const logger = require('tatsy-logger');
 
 const _decodeFile = (f) => {
   const file = fs.readFileSync(f, 'utf8');
@@ -56,17 +56,17 @@ module.exports = (isStarted, success) => {
         const name = path.basename(f);
         const content = _decodeFile(f);
         const buildFile = `${config.filesDir}/${name}`;
-    
+
         // save decoding file
         if (config.saveFile) {
           fs.appendFileSync(buildFile, content, 'utf8');
         }
-    
+
         // Show Build log
         if (isStarted) {
           logger.building(f, buildFile);
         }
-    
+
         lines.push(content);
       });
 

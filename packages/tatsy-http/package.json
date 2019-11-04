@@ -1,10 +1,10 @@
 {
-  "name": "tat-http",
-  "version": "0.0.1",
+  "name": "tatsy-http",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "echo 'HOPS: implement me(tat-http)'"
+    "test": "echo 'HOPS: implement me(tatsy-http)'"
   },
   "dependencies": {
     "express": "^4.17.1"

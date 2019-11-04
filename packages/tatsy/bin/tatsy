@@ -2,8 +2,8 @@
 const nodemon = require('nodemon');
 
 // Official packages
-const { watcher } = require('tat-watcher');
-const config = require('tat-config');
+const { watcher } = require('tatsy-watcher');
+const config = require('tatsy-config');
 
 // Bundler func
 const bundler = require('../utils/bundler');

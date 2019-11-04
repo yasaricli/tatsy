@@ -1,10 +1,10 @@
 {
-  "name": "tat-logger",
-  "version": "0.0.1",
+  "name": "tatsy-logger",
+  "version": "0.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "echo 'HOPS: implement me(tat-logger)'"
+    "test": "echo 'HOPS: implement me(tatsy-logger)'"
   },
   "dependencies": {
     "chalk": "^2.4.2",

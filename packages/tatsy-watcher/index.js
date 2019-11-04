@@ -1,5 +1,5 @@
 const chokidar = require('chokidar');
-const logger = require('tat-logger');
+const logger = require('tatsy-logger');
 
 const _onAdd = (path, fn) => {
 

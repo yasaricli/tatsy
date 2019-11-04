@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const parsePath = require('parse-filepath');
-const config = require('tat-config');
+const config = require('tatsy-config');
 
 // log extend.
 const log = console.log;

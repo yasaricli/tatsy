@@ -6,7 +6,7 @@ const _appAbsolutePath = (p) => {
 };
 
 const _getConfigFile = () => {
-  const file = _appAbsolutePath('tat.config.js');
+  const file = _appAbsolutePath('tatsy.config.js');
 
   if (fs.existsSync(file)) {
     return require(file);
@@ -16,7 +16,7 @@ const _getConfigFile = () => {
 };
 
 const APP_DIR = _appAbsolutePath('.');
-const BUILD_DIR = _appAbsolutePath('.tat');
+const BUILD_DIR = _appAbsolutePath('.tatsy');
 const ENDPOINT_DIR = _appAbsolutePath('endpoints/*.js');
 
 module.exports = {

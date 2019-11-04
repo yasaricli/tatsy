@@ -1,9 +1,9 @@
 {
-  "name": "tat-monorepo",
+  "name": "tatsy-monorepo",
   "version": "0.0.1",
   "description": "A simple interface for creating REST APIs",
   "main": "index.js",
-  "repository": "https://github.com/tsepeti/tat.git",
+  "repository": "https://github.com/tsepeti/tatsy.git",
   "author": "Yasar icli <yasaricli@gmail.com>",
   "license": "MIT",
   "scripts": {

@@ -1,7 +1,7 @@
 const express = require('express');
 
 // Official packages
-const config = require('tat-config');
+const config = require('tatsy-config');
 
 // application
 const app = express();
