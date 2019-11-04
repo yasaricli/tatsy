@@ -28,6 +28,148 @@ and add a script to your **package.json** like this:
 
 and then just run `yarn start` and go to http://localhost:3000/api
 
+## Defining Collection Routes
+One of the most common uses for a REST API is exposing a set of operations on your collections.
+All available REST endpoints can be generated for a Mongo Collection using
+`Tatsy.addCollection()`.
+
+**`/api/<collection>`**
+- Operations on the entire collection
+-  `GET` and `POST`
+
+**`/api/<collection>/:id`**
+- Operations on a single entity within the collection
+- `GET`, `PUT`, `PATCH` and `DELETE`
+
+## Defining Custom Routes
+Routes are defined using `Tatsy.addRoute()`. A route consists of a path and a set of endpoints
+defined at that path.
+
+In this example we have a parameter named `_id`. If we navigate to the `/posts/5` URL in our browser,
+inside of the GET endpoint function we can get the actual value of the `_id` from
+`(_id) { console.log(_id) }`. In this case `_id => 5`.
+
+```javascript
+// posts.js | Given a URL "/posts/5"
+Totsy.addRoute({
+  get(_id) {
+    console.log(_id)
+  }
+});
+```
+
+### Defining Endpoints
+
+The last parameter of `Tatsy.addRoute` is an object with properties corresponding to the supported
+HTTP methods. At least one method must have an endpoint defined on it. The following endpoints can
+be defined in Tatsy:
+- `getAll`
+- `get`
+- `post`
+- `put`
+- `delete`
+
+### Request and Response Structure
+
+Sample requests and responses for each endpoint are included below:
+
+#### `post`
+Request:
+```bash
+curl -X POST http://localhost:3000/api/articles/ -d "title=Witty Title" -d "author=Jack Rose"
+```
+
+Response:
+
+Status Code: `201`
+```json
+{
+  "status": "success",
+  "data": {
+    "_id": "LrcEYNojn5N7NPRdo",
+    "title": "Witty Title",
+    "author": "Jack Rose"
+  }
+}
+```
+
+#### `getAll`
+Request:
+```bash
+curl -X GET http://localhost:3000/api/articles/
+```
+
+Response:
+```json
+{
+  "status": "success",
+  "data": [
+    {
+      "_id": "LrcEYNojn5N7NPRdo",
+      "title": "Witty Title!",
+      "author": "Jack Rose",
+    },
+    {
+      "_id": "7F89EFivTnAcPMcY5",
+      "title": "Average Stuff",
+      "author": "Joe Schmoe",
+    }
+  ]
+}
+```
+
+#### `get`
+Request:
+```bash
+curl -X GET http://localhost:3000/api/articles/LrcEYNojn5N7NPRdo
+```
+
+Response:
+```json
+{
+  "status": "success",
+  "data": {
+    "_id": "LrcEYNojn5N7NPRdo",
+    "title": "Witty Title",
+    "author": "Jack Rose",
+  }
+}
+```
+
+#### `put`
+Request:
+```bash
+curl -X PUT http://localhost:3000/api/articles/LrcEYNojn5N7NPRdo -d "title=Wittier Title" -d "author=Jaclyn Rose"
+```
+
+Response:
+```json
+{
+  "status": "success",
+  "data": {
+    "_id": "LrcEYNojn5N7NPRdo",
+    "title": "Wittier Title",
+    "author": "Jaclyn Rose"
+  }
+}
+```
+
+#### `delete`
+Request:
+```bash
+curl -X DELETE http://localhost:3000/api/articles/LrcEYNojn5N7NPRdo
+```
+
+Response:
+```json
+{
+  "status": "success",
+  "data": {
+    "message": "Item removed"
+  }
+}
+```
+
 ## Packages
 
 This repository is a monorepo that we manage using [Lerna](https://github.com/lerna/lerna). That means that we actually publish [several packages](/packages) to npm from the same codebase, including:
