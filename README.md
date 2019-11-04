@@ -62,8 +62,10 @@ inside of the GET endpoint function we can get the actual value of the `_id` fro
 ```javascript
 // posts.js | Given a URL "/posts/5"
 Totsy.addRoute({
-  get(_id) {
-    console.log(_id)
+  endpoints: {
+    get(_id) {
+      console.log(_id)
+    }
   }
 });
 ```
@@ -86,7 +88,7 @@ Sample requests and responses for each endpoint are included below:
 #### `post`
 Request:
 ```bash
-curl -X POST http://localhost:3000/api/articles/ -d "title=Witty Title" -d "author=Jack Rose"
+curl -X POST http://localhost:3000/api/articles/ -d "title=Tatilsepeti" -d "author=Yaşar İçli"
 ```
 
 Response:
@@ -97,8 +99,8 @@ Status Code: `201`
   "status": "success",
   "data": {
     "_id": "LrcEYNojn5N7NPRdo",
-    "title": "Witty Title",
-    "author": "Jack Rose"
+    "title": "Tatilsepeti",
+    "author": "Yaşar İçli"
   }
 }
 ```
@@ -116,13 +118,13 @@ Response:
   "data": [
     {
       "_id": "LrcEYNojn5N7NPRdo",
-      "title": "Witty Title!",
-      "author": "Jack Rose",
+      "title": "Tatilsepeti",
+      "author": "Yaşar İçli",
     },
     {
       "_id": "7F89EFivTnAcPMcY5",
-      "title": "Average Stuff",
-      "author": "Joe Schmoe",
+      "title": "Tatilsepeti",
+      "author": "Can",
     }
   ]
 }
@@ -140,8 +142,8 @@ Response:
   "status": "success",
   "data": {
     "_id": "LrcEYNojn5N7NPRdo",
-    "title": "Witty Title",
-    "author": "Jack Rose",
+    "title": "Tatilsepeti",
+    "author": "Yaşar İçli",
   }
 }
 ```
@@ -149,7 +151,7 @@ Response:
 #### `put`
 Request:
 ```bash
-curl -X PUT http://localhost:3000/api/articles/LrcEYNojn5N7NPRdo -d "title=Wittier Title" -d "author=Jaclyn Rose"
+curl -X PUT http://localhost:3000/api/articles/LrcEYNojn5N7NPRdo -d "title=Tatilsepeti" -d "author=İlhan"
 ```
 
 Response:
@@ -158,8 +160,8 @@ Response:
   "status": "success",
   "data": {
     "_id": "LrcEYNojn5N7NPRdo",
-    "title": "Wittier Title",
-    "author": "Jaclyn Rose"
+    "title": "Tatilsepeti",
+    "author": "İlhan"
   }
 }
 ```
