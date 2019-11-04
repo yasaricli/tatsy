@@ -8,16 +8,16 @@
     "test": "echo 'HOPS: implement me(tatsy)'"
   },
   "bin": {
-    "morsing": "bin/tatsy"
+    "tatsy": "bin/tatsy"
   },
   "dependencies": {
     "glob": "^7.1.5",
     "mkdirp": "^0.5.1",
     "nodemon": "^1.19.4",
     "rimraf": "^3.0.0",
-    "tatsy-config": "^0.0.4",
-    "tatsy-http": "^0.0.6",
-    "tatsy-logger": "^0.0.7",
-    "tatsy-watcher": "^0.0.5"
+    "tatsy-config": "^0.0.1",
+    "tatsy-http": "^0.0.1",
+    "tatsy-logger": "^0.0.1",
+    "tatsy-watcher": "^0.0.1"
   }
 }

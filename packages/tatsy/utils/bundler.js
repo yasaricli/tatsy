@@ -41,7 +41,7 @@ module.exports = (isStarted, success) => {
   _clearBaseDir(() => {
     const globOptions = {};
 
-    glob(config.morsDir, globOptions, (error, files) => {
+    glob(config.endpointsDir, globOptions, (error, files) => {
       const lines = [];
 
       // Main Start Add
@@ -67,7 +67,11 @@ module.exports = (isStarted, success) => {
           logger.building(f, buildFile);
         }
 
-        lines.push(content);
+        lines.push(`
+(() => {
+${content}
+})()
+        `);
       });
 
       // Show Build log
