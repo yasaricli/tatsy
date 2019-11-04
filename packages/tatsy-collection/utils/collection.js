@@ -2,21 +2,16 @@
 const mongoose = require('mongoose');
 
 const db = require('./db');
-const { returnJSON, returnSuccess, returnFail } = require('./returns');
-const { apiUrl } = require('./shortcuts');
 
 // connect mongo
 db.connect(mongoose);
 
-module.exports = (col) => {
-  const {
-    name,
-    schema,
-    isCollection = true,
-    endpoints = {}
-  } = col;
+const { returnJSON, returnSuccess, returnFail } = require('./returns');
+const { apiUrl } = require('./shortcuts');
 
-  if (isCollection) {
+module.exports = (name, options) => {
+  const { schema = {} } = options;
+
     return (http, url) => {
       const Model = mongoose.model(name, schema);
 
@@ -78,48 +73,4 @@ module.exports = (col) => {
         });
       });
     };
-  }
-
-  return (http, url) => {
-    const { getAll, get, post, put, del } = endpoints;
-
-    if (getAll) {
-      http.get(apiUrl(url), (req, res) => {
-        return res.json(getAll(req, res));
-      });
-    }
-
-    if (get) {
-      http.get(apiUrl(url, '_id'), (req, res) => {
-        const { _id } = req.params;
-        return res.json(get(_id));
-      });
-    }
-
-    if (post) {
-      http.get(apiUrl(url, '_id'), (req, res) => {
-        const { _id } = req.params;
-        const { body } = req;
-
-        return res.json(post(_id, body));
-      });
-    }
-
-    if (put) {
-      http.get(apiUrl(url, '_id'), (req, res) => {
-        const { _id } = req.params;
-        const { body } = req;
-
-        return res.json(put(_id, body));
-      });
-    }
-
-    if (del) {
-      http.get(apiUrl(url, '_id'), (req, res) => {
-        const { _id } = req.params;
-
-        return res.json(del(_id));
-      });
-    }
-  };
 };
