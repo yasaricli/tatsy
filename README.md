@@ -22,6 +22,8 @@ and add a script to your **package.json** like this:
 },
 ```
 
+and then just run `yarn start` and go to http://localhost:3000/api
+
 ## Packages
 
 This repository is a monorepo that we manage using [Lerna](https://github.com/lerna/lerna). That means that we actually publish [several packages](/packages) to npm from the same codebase, including:
