@@ -30,7 +30,7 @@ module.exports = {
         data: {
           message: 'endpoint not found'
         }
-      })
+      });
     });
   },
   

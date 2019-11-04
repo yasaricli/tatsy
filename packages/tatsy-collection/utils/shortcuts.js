@@ -8,4 +8,4 @@ const apiUrl = (name, _id) => {
 
 module.exports = {
   apiUrl
-}
+};

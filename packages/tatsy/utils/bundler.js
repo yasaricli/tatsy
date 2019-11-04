@@ -13,7 +13,7 @@ const logger = require('tatsy-logger');
 
 const _safeFileName = (name) => {
   return name.replace('.js', '');
-}
+};
 
 const _getFile = (f) => {
   return fs.readFileSync(f, 'utf8');

@@ -4,4 +4,4 @@ const collection = require('tatsy-collection');
 module.exports = {
   ...http,
   ...collection
-}
+};
