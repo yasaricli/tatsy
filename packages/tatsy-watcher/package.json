@@ -1,6 +1,6 @@
 {
   "name": "tatsy-watcher",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "chokidar": "^3.3.0",
-    "tatsy-logger": "^0.0.2"
+    "tatsy-logger": "^0.0.3"
   }
 }

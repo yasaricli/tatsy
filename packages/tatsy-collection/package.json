@@ -1,6 +1,6 @@
 {
   "name": "tatsy-collection",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "mongoose": "^5.7.7",
-    "tatsy-http": "^0.0.3"
+    "tatsy-http": "^0.0.4"
   }
 }

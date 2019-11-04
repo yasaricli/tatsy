@@ -1,6 +1,6 @@
 {
   "name": "tatsy-http",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "tatsy-config": "^0.0.1"
+    "tatsy-config": "^0.0.2"
   }
 }
