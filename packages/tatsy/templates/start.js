@@ -1,4 +1,4 @@
-const tatsy = require('tatsy');
+const Tatsy = require('tatsy');
 
 // json, urlencoded parser
-tatsy.parser();
+Tatsy.parser();

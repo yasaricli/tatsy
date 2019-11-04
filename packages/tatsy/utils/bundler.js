@@ -72,7 +72,7 @@ module.exports = (isStarted, success) => {
 
         lines.push(`
 (() => {
-${content}(tatsy, "${_safeFileName(name)}");
+${content}(Tatsy, "${_safeFileName(name)}");
 })();
         `);
       });

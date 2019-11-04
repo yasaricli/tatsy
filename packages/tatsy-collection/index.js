@@ -1,5 +1,7 @@
-const collection = require('./utils/collection');
+const addCollection = require('./utils/collection');
+const addRoute = require('./utils/route');
 
 module.exports = {
-  collection
+  addCollection,
+  addRoute
 };

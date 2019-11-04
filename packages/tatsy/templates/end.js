@@ -1,5 +1,5 @@
 // Not found handlers
-tatsy.all();
+Tatsy.all();
 
 // listen tatsy 
-tatsy.start();
+Tatsy.start();
