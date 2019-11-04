@@ -8,18 +8,19 @@ db.connect(mongoose);
 module.exports = {
   collection(col) {
     return (http, url) => {
-      const model = mongoose.model(col.name, col.schema);
+      const Model = mongoose.model(col.name, col.schema);
 
       // getAll
       http.get(`/api/${url}`, (req, res) => {
-        model.find({ }, (err, list) => {
+        Model.find({ }, (err, list) => {
           res.json(returnJSON('success', list))
         })
       });
 
       http.get(`/api/${url}/:_id`, (req, res) => {
         const { _id } = req.params;
-        return model.findOne({ _id }, (err, doc) => {
+
+        return Model.findOne({ _id }, (err, doc) => {
           if (doc) {
             return res.json(returnSuccess(doc));
           }
@@ -29,7 +30,15 @@ module.exports = {
       });
 
       http.post(`/api/${url}`, (req, res) => {
-        return res.json(returnJSON('success', {}));
+        const { body } = req;
+
+        // create model
+        const doc = new Model(body);
+
+        // save doc
+        return doc.save((err, data) => {
+          return res.json(returnSuccess(data));
+        });
       });
 
       http.put(`/api/${url}/:_id`, (req, res) => {
@@ -37,7 +46,16 @@ module.exports = {
       });
 
       http.delete(`/api/${url}/:_id`, (req, res) => {
-        return res.json(returnJSON('success', {}));
+        const { _id } = req.params;
+
+        // remove
+        return Model.findOneAndDelete({ _id }, (err, data) => {
+          if (data) {
+            return res.json(returnSuccess(data));
+          }
+
+          return res.json(returnFail(_id));
+        })
       });
     }
   }

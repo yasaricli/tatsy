@@ -1,4 +1,3 @@
-
 // Not found handlers
 tatsy.all();
 

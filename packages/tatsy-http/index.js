@@ -16,11 +16,11 @@ module.exports = {
   },
 
   delete(url, callback) {
-    return app.post(url, callback);
+    return app.delete(url, callback);
   },
 
   put(url, callback) {
-    return app.post(url, callback);
+    return app.put(url, callback);
   },
 
   all() {
@@ -32,6 +32,11 @@ module.exports = {
         }
       })
     });
+  },
+  
+  parser() {
+    app.use(express.urlencoded({extended: true})); 
+    app.use(express.json());
   },
 
   start() {
