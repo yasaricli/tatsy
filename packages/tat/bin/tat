@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+const nodemon = require('nodemon');
+
+// Official packages
+const { watcher } = require('tat-watcher');
+const config = require('tat-config');
+
+// Bundler func
+const bundler = require('../utils/bundler');
+
+bundler(true, () => {
+  const server = nodemon({
+    script: `${config.buildDir}/main.js`,
+  });
+  
+  // on events
+  server.on('quit', () => process.exit());
+
+  // Changed, Added, Removed Watch
+  return watcher(config.endpointsDir, () => {
+
+    // Build scripts
+    return bundler(false, () => {
+
+      // Restart Server
+      server.restart();
+    });
+  });
+});
