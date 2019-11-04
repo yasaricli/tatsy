@@ -1,6 +1,6 @@
 {
   "name": "tat",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A simple interface for creating REST APIs",
   "main": "index.js",
   "license": "MIT",
@@ -10,11 +10,11 @@
   "dependencies": {
     "glob": "^7.1.5",
     "mkdirp": "^0.5.1",
+    "nodemon": "^1.19.4",
+    "rimraf": "^3.0.0",
     "tat-config": "^0.0.4",
     "tat-http": "^0.0.6",
     "tat-logger": "^0.0.7",
-    "tat-watcher": "^0.0.5",
-    "nodemon": "^1.19.4",
-    "rimraf": "^3.0.0"
+    "tat-watcher": "^0.0.5"
   }
 }
