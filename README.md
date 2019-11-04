@@ -33,6 +33,16 @@ One of the most common uses for a REST API is exposing a set of operations on yo
 All available REST endpoints can be generated for a Mongo Collection using
 `Tatsy.addCollection()`.
 
+```javascript
+// posts.js | Given a URL "/posts/5"
+Totsy.addCollection({
+  name: 'posts', // Mongo Collection name
+  schema: {
+    title: String
+  }
+});
+```
+
 **`/api/<collection>`**
 - Operations on the entire collection
 -  `GET` and `POST`
