@@ -1,0 +1,13 @@
+{
+  "name": "tat-logger",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo 'HOPS: implement me(tat-logger)'"
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "parse-filepath": "^1.0.2"
+  }
+}

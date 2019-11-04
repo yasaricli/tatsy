@@ -1,0 +1,28 @@
+{
+  "name": "tat-monorepo",
+  "version": "0.0.1",
+  "description": "A simple interface for creating REST APIs",
+  "main": "index.js",
+  "repository": "https://github.com/tsepeti/tat.git",
+  "author": "Yasar icli <yasaricli@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lerna:clean": "lerna clean --yes",
+    "lerna:bootstrap": "lerna bootstrap",
+    "lerna:publish": "lerna publish",
+    "lerna:test": "lerna exec yarn test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "jest:coverage": "jest --coverage",
+    "update-readme-toc": "doctoc README.md"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "doctoc": "^1.4.0",
+    "eslint": "^6.6.0",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-monorepo": "^0.2.1",
+    "jest": "^24.9.0",
+    "lerna": "^3.18.3"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+*.log
+.DS_Store
+coverage
+.idea
+.tracker
+.tmp
+lib
+es
+package-lock.json
+npm-debug.log
