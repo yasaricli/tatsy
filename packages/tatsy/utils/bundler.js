@@ -67,7 +67,7 @@ module.exports = (isStarted, success) => {
 
         // Show Build log
         if (isStarted) {
-          logger.building(f, buildFile);
+          logger.building(f);
         }
 
         lines.push(`

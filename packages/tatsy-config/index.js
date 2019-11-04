@@ -22,6 +22,10 @@ const ENDPOINT_DIR = _appAbsolutePath('endpoints/*.js');
 module.exports = {
   port: 3000,
   host: '127.0.0.1',
+
+  // show verbose logs
+  verbose: false,
+  
   appDir: APP_DIR,
   buildDir: BUILD_DIR,
   endpointsDir: ENDPOINT_DIR,

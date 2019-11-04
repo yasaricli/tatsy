@@ -6,12 +6,12 @@ const config = require('tatsy-config');
 const log = console.log;
 
 const _getFileName = (path) => {
-  const { basename } = parsePath(path);
-  return basename;
+  const { name } = parsePath(path);
+  return `/api/${name}`;
 };
 
 const _watcherText = (text, event) => {
-  return log(chalk.white('- File', text, `has been ${event}`));
+  return log(chalk.white('- Endpoint', text, `has been ${event}`));
 };
 
 const enter = () => {
@@ -22,12 +22,13 @@ const started = () => {
   return log(`
     - PORT: ${chalk.red(config.port)}
     - HOST: ${chalk.green(config.host)}
-    - Server running at http://${config.host}:${config.port}
+    - VERBOSE_MODE: ${chalk.yellow(config.verbose)}
+    - Api running at http://${config.host}:${config.port}/api
   `);
 };
 
 const building = (file) => {
-  return log(chalk.white('Building is', chalk.bgBlue(` ${_getFileName(file)} `),  'OK'));
+  return log(chalk.white('*', chalk.bgBlue(` ${_getFileName(file)} `),  'OK'));
 };
 
 const watcherChanged = (path) => {

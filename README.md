@@ -7,6 +7,24 @@
 ## Status
 [![CircleCI](https://circleci.com/gh/tsepeti/tatsy/tree/master.svg?style=svg)](https://circleci.com/gh/tsepeti/tatsy/tree/master)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Getting started](#getting-started)
+- [Defining Collection Routes](#defining-collection-routes)
+- [Defining Custom Routes](#defining-custom-routes)
+  - [Defining Endpoints](#defining-endpoints)
+  - [Request and Response Structure](#request-and-response-structure)
+    - [`post`](#post)
+    - [`getAll`](#getall)
+    - [`get`](#get)
+    - [`put`](#put)
+    - [`delete`](#delete)
+- [Packages](#packages)
+- [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Getting started
 
