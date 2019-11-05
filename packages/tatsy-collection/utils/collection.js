@@ -1,5 +1,6 @@
 // Mongo
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const db = require('./db');
 
@@ -10,10 +11,19 @@ const { returnJSON, returnSuccess, returnFail } = require('./returns');
 const { apiUrl } = require('./shortcuts');
 
 module.exports = (name, options) => {
-  const { schema = {} } = options;
+  const {
+    schema = {}, 
+    schemaOptions = {},
+    transform = (doc, obj) => obj
+  } = options;
 
   return (http, url) => {
-    const Model = mongoose.model(name, schema);
+    const Model = mongoose.model(name, new Schema(schema, {
+      timestamps: true,
+      versionKey: false,
+      toJSON: { transform },
+      ...schemaOptions
+    }));
 
     // getAll
     http.get(apiUrl(url), (req, res) => {
