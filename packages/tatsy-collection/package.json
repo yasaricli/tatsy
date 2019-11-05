@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "mongoose": "^5.7.7",
-    "tatsy-http": "^0.0.5"
+    "tatsy-http": "^0.0.5",
+    "tatsy-logger": "^0.0.4"
   }
 }

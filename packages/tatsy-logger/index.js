@@ -1,3 +1,5 @@
+const { Signale } = require('signale');
+
 const chalk = require('chalk');
 const parsePath = require('parse-filepath');
 const config = require('tatsy-config');
@@ -5,13 +7,21 @@ const config = require('tatsy-config');
 // log extend.
 const log = console.log;
 
+const buildingGlobal = new Signale({
+  scope: 'Building'
+});
+
+const mongoGlobal = new Signale({
+  scope: 'Mongodb'
+});
+
+const watcherGlobal = new Signale({
+  scope: 'Watcher'
+});
+
 const _getFileName = (path) => {
   const { name } = parsePath(path);
   return `/api/${name}`;
-};
-
-const _watcherText = (text, event) => {
-  return log(chalk.white('- Endpoint', text, `has been ${event}`));
 };
 
 const enter = () => {
@@ -28,19 +38,19 @@ const started = () => {
 };
 
 const building = (file) => {
-  return log(chalk.white('*', chalk.bgBlue(` ${_getFileName(file)} `),  'OK'));
+  return buildingGlobal.success(_getFileName(file));
 };
 
 const watcherChanged = (path) => {
-  return _watcherText(chalk.blue(chalk.bgYellow(` ${_getFileName(path)} `)), 'Changed');
+  return watcherGlobal.success(`${_getFileName(path)} changed successful`);
 };
 
 const watcherRemoved = (path) => {
-  return _watcherText(chalk.bgRed(` ${_getFileName(path)} `), 'Removed');
+  return watcherGlobal.success(`${_getFileName(path)} remove successful`);
 };
 
 const watcherAdded = (path) => {
-  return _watcherText(chalk.bgBlue(` ${_getFileName(path)} `), 'Added');
+  return watcherGlobal.success(`${_getFileName(path)} added successful`);
 };
 
 module.exports = {
@@ -50,5 +60,6 @@ module.exports = {
   building,
   watcherChanged,
   watcherRemoved,
-  watcherAdded
+  watcherAdded,
+  mongoGlobal
 };
