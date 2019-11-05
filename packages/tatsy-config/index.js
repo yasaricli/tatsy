@@ -15,19 +15,21 @@ const _getConfigFile = () => {
   return { };
 };
 
-const APP_DIR = _appAbsolutePath('.');
-const BUILD_DIR = _appAbsolutePath('.tatsy');
-const ENDPOINT_DIR = _appAbsolutePath('endpoints/*.js');
-
 module.exports = {
   port: 3000,
   host: '127.0.0.1',
 
   // show verbose logs
   verbose: false,
+
+  // Tatsy Plugins use tatsy-plugins
+  plugins: [],
   
-  appDir: APP_DIR,
-  buildDir: BUILD_DIR,
-  endpointsDir: ENDPOINT_DIR,
-  ..._getConfigFile()
+  // overwrite previous
+  ..._getConfigFile(),
+
+  // is in read-only mode.
+  appDir: _appAbsolutePath('.'),
+  buildDir: _appAbsolutePath('.tatsy'),
+  endpointsDir: _appAbsolutePath('endpoints/*.js')
 };
