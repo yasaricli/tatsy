@@ -212,8 +212,14 @@ This repository is a monorepo that we manage using [Lerna](https://github.com/le
 | [`tatsy-logger`](/packages/tatsy-logger)               | [![npm](https://img.shields.io/npm/v/tatsy-logger.svg?style=flat-square)](https://www.npmjs.com/package/tatsy-logger)               | Log using chalk                                                                     |
 | [`tatsy-config`](/packages/tatsy-config)               | [![npm](https://img.shields.io/npm/v/tatsy-config.svg?style=flat-square)](https://www.npmjs.com/package/tatsy-config)               | Config package                                                                      |
 | [`tatsy-watcher`](/packages/tatsy-watcher)             | [![npm](https://img.shields.io/npm/v/tatsy-watcher.svg?style=flat-square)](https://www.npmjs.com/package/tatsy-watcher)             | package to watch all javascript files                                               |
+## Developer Resources
 
+Interested in helping or contributing to Tatsy?  These resources will help:
+
+* [Core development guide](DEVELOPMENT.md)
+* [Contribution guidelines](CONTRIBUTING.md)
+* [Issue tracker](https://github.com/tsepeti/tatsy/issues)
 
 ## License
 
-Tatsy is open source software [licensed as MIT](https://github.com/tsepeti/tatsy/blob/master/LICENSE).
+Tatsy is open source software [licensed as MIT](LICENSE.md).
