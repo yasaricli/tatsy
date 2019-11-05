@@ -1,4 +1,7 @@
 const express = require('express');
+const exphbs  = require('express-handlebars');
+const path = require('path');
+const listEndpoints = require('express-list-endpoints');
 
 // Official packages
 const config = require('tatsy-config');
@@ -23,6 +26,18 @@ module.exports = {
     return app.put(url, callback);
   },
 
+  docs() {
+
+    // active template
+    this.templateEngine();
+
+    return app.get('/', (req, res) => {
+      return res.render('index', {
+        endpoints: listEndpoints(app)
+      });
+    })
+  },
+
   all() {
     return app.get('*', (req, res) => {
       return res.json({
@@ -37,6 +52,23 @@ module.exports = {
   parser() {
     app.use(express.urlencoded({extended: true})); 
     app.use(express.json());
+  },
+
+  templateEngine() {
+    const handler = exphbs({
+      layoutsDir: path.resolve(__dirname,'views/layouts'),
+      partialsDir: path.resolve(__dirname,'views/partials'),
+      defaultLayout: 'main'
+    });
+
+    // engine
+    app.engine('handlebars', handler);
+
+    // set views http/views
+    app.set('views', __dirname + '/views');
+
+    // set engine
+    app.set('view engine', 'handlebars');
   },
 
   start() {

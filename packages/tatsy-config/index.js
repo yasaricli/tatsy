@@ -25,6 +25,9 @@ module.exports = {
   // Tatsy Plugins use tatsy-plugins
   plugins: [],
   
+  // api docs
+  docs: false,
+
   // overwrite previous
   ..._getConfigFile(),
 
