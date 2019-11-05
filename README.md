@@ -222,4 +222,4 @@ Interested in helping or contributing to Tatsy?  These resources will help:
 
 ## License
 
-Tatsy is open source software [licensed as MIT](LICENSE.md).
+Tatsy is open source software [licensed as MIT](LICENSE).
