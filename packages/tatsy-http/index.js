@@ -35,7 +35,7 @@ module.exports = {
       return res.render('index', {
         endpoints: listEndpoints(app)
       });
-    })
+    });
   },
 
   all() {
