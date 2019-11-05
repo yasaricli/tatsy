@@ -1,9 +1,9 @@
 /*
  * add tatsy.config.js
- * plugins: ['Docs']
+ * plugins: ['Example']
  */
 module.exports = {
-  name: 'Docs',
+  name: 'Example',
   run(Tatsy) {
     
     console.log(Tatsy);
