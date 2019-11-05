@@ -1,6 +1,6 @@
 {
 	"name": "tatsy",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "A simple interface for creating REST APIs",
 	"main": "index.js",
 	"license": "MIT",
@@ -8,8 +8,8 @@
 		"tatsy": "bin/tatsy"
 	},
 	"scripts": {
-    "test": "echo 'HOPS: implement me(tatsy)'"
-  },
+		"test": "echo 'HOPS: implement me(tatsy)'"
+	},
 	"dependencies": {
 		"glob": "^7.1.5",
 		"mkdirp": "^0.5.1",
