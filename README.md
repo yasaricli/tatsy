@@ -1,4 +1,8 @@
 <p align="center">
+  <img src="screen.png" />
+</p>
+
+<p align="center">
   A simple interface for creating REST APIs
   <br>
   <a href="https://tatsy.js.org/"><strong>Website</strong></a> | <a href="https://tatsy.js.org/docs"><strong>Docs</strong></a>
