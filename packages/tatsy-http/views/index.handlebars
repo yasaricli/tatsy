@@ -1,0 +1,10 @@
+<ul>
+  {{#each endpoints }}
+    <li>
+      <div>PATH: {{ path }}</div>
+      <div>
+        {{#each methods }}{{.}}, {{/each}}
+      </div>
+    </li>
+  {{/each}}
+</ul>
