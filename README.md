@@ -83,7 +83,7 @@ inside of the GET endpoint function we can get the actual value of the `_id` fro
 
 ```javascript
 // posts.js | Given a URL "/posts/5"
-Totsy.addRoute({
+Tatsy.addRoute({
   endpoints: {
     get(_id) {
       console.log(_id)
