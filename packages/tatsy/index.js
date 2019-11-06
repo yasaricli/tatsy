@@ -1,9 +1,11 @@
-const http = require('tatsy-http');
-const collection = require('tatsy-collection');
-const config = require('tatsy-config');
+const Http = require('tatsy-http');
+const Collection = require('tatsy-collection');
+const Config = require('tatsy-config');
+const Mongo = require('tatsy-mongo');
 
 module.exports = {
-  ...http,
-  ...collection,
-  config
+  Http,
+  Mongo,
+  Collection,
+  Config
 };

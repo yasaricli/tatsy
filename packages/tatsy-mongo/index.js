@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const { mongoGlobal } = require('tatsy-logger');
 
 module.exports = {
-
-  // roo mongo object
-  mongo: mongoose,
-
+  ...mongoose,
+  
   // connect mongodb 
   connect() {
     const { connection } = mongoose;

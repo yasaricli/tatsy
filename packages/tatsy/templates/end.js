@@ -1,5 +1,5 @@
 // Not found handlers
-Tatsy.all();
+Tatsy.Http.all();
 
 // listen tatsy 
-Tatsy.start();
+Tatsy.Http.start();
