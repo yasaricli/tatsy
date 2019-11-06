@@ -31,8 +31,8 @@ const enter = () => {
 const started = () => {
   return log(`
     - PORT: ${chalk.red(config.port)}
-    - MONGO: ${chalk.green(config.mongoUrl || '-')}
-    - OPLOG: ${chalk.green(config.oplogUrl || '-')}
+    - MONGO: ${chalk.green(config.mongoUrl || '-')}
+    - OPLOG: ${chalk.green(config.oplogUrl || '-')}
     - DOCS: ${chalk.green(config.docs ? config.rootUrl : '-')}
     - API: ${chalk.green(config.apiUrl)}
   `);

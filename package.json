@@ -27,5 +27,7 @@
     "lerna": "^3.18.3",
     "lerna-changelog": "^0.8.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "directory-exists": "^2.0.1"
+  }
 }

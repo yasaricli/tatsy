@@ -54,7 +54,8 @@ const CONFIGS = {
   // Application directories
   appDir: _appAbsolutePath('.'),
   buildDir: _appAbsolutePath('.tatsy'),
-  endpointsDir: _appAbsolutePath('endpoints/*.js')
+  endpointsDir: _appAbsolutePath('endpoints/*.js'),
+  mainJs: _appAbsolutePath('.tatsy/main.js')
 };
 
 module.exports = {

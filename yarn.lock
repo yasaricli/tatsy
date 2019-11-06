@@ -2342,6 +2342,11 @@ dir-glob@^2.0.0, dir-glob@^2.2.2:
   dependencies:
     path-type "^3.0.0"
 
+directory-exists@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/directory-exists/-/directory-exists-2.0.1.tgz#7c763f1c75975c088f8f74cd669e150b7cdaf030"
+  integrity sha512-+CEod3IzwjvhQOMXFSU6nrqdTwrhzOiacNzzXlwBVFm7C4y2rbuEWs5WaRsI/3IZeSWORA5F1q8FBh3gm4HSsw==
+
 doctoc@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/doctoc/-/doctoc-1.4.0.tgz#3115aa61d0a92f0abb0672036918ea904f5b9e02"

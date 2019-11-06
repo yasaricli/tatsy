@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const nodemon = require('nodemon');
+const directoryExists = require('directory-exists');
 
 // Official packages
 const { watcher } = require('tatsy-watcher');
@@ -8,22 +9,37 @@ const config = require('tatsy-config');
 // Bundler func
 const bundler = require('../utils/bundler');
 
-bundler(false, () => {
-  const server = nodemon({
-    script: `${config.buildDir}/main.js`,
-  });
+// Bundler
+((isProduction) => {
+  if (isProduction) {
+    return directoryExists(config.buildDir, (error, result) => {
+      if (result) {
+        return require(config.mainJs);
+      }
+
+      return bundler(false, () => {
+        return require(config.mainJs);
+      })
+    })
+  }
   
-  // on events
-  server.on('quit', () => process.exit());
-
-  // Changed, Added, Removed Watch
-  return watcher(config.endpointsDir, () => {
-
-    // Build scripts
-    return bundler(true, () => {
-
-      // Restart Server
-      server.restart();
+  return bundler(false, () => {
+    const server = nodemon({
+      script: `${config.buildDir}/main.js`,
+    });
+    
+    // on events
+    server.on('quit', () => process.exit());
+  
+    // Changed, Added, Removed Watch
+    return watcher(config.endpointsDir, () => {
+  
+      // Build scripts
+      return bundler(true, () => {
+  
+        // Restart Server
+        server.restart();
+      });
     });
   });
-});
+})(config.isProduction);
