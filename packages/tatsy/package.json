@@ -1,6 +1,6 @@
 {
 	"name": "tatsy",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"description": "A simple interface for creating REST APIs",
 	"main": "index.js",
 	"license": "MIT",
