@@ -1,1 +1,16 @@
-<div id="root"></div>
+<div class="swagger-ui">
+  {{#each endpoints }}
+    <div class="opblock">
+      <div class="opblock-summary opblock-summary-post">
+          {{#each methods }}
+            <span class="opblock-summary-method opblock-{{.}}">{{.}}</span>
+          {{/each}}
+          <span class="opblock-summary-path">
+            <a class="nostyle" href="/api{{path}}">
+              <span>{{ path }}</span>
+            </a>
+          </span>
+      </div>
+    </div>
+  {{/each}}
+</div>

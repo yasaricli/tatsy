@@ -1,0 +1,123 @@
+body {
+    padding: 30px;
+}
+
+a{ text-decoration:none }
+a:hover { text-decoration: underline;}
+.authorization__btn {display:none}
+
+.swagger-ui {
+    font-family: adobe-clean, adobeclean, sans-serif;
+}
+
+.swagger-ui .opblock {
+    margin: 0 0 15px;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 0 3px rgba(0,0,0,.19);
+    box-shadow: 0 0 3px rgba(0,0,0,.19);
+}
+
+.swagger-ui .opblock-GET {
+    background: #1473E6!important;
+}
+
+.swagger-ui .opblock-POST {
+    background: #12805C!important;
+}
+
+.swagger-ui .opblock-PUT {
+    background: #B06111!important;
+}
+
+.swagger-ui .opblock-PATCH {
+    background: #0F797D!important;
+}
+
+.swagger-ui .opblock-DELETE {
+    background: #D7373F!important;
+}
+
+.swagger-ui .opblock-HEAD {
+    background: #864CCC!important;
+}
+
+.swagger-ui .opblock .opblock-summary {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.swagger-ui .opblock .opblock-summary-method {
+    font-size: 14px;
+    font-weight: 700;
+    min-width: 80px;
+    padding: 6px 15px;
+    text-align: center;
+    border-radius: 3px;
+    background: #000;
+    text-shadow: 0 1px 0 rgba(0,0,0,.1);
+    font-family: Titillium Web,sans-serif;
+    color: #fff;
+    margin: 0 5px;
+}
+
+.swagger-ui .opblock.opblock-GET .opblock-summary-method {
+    background: #1473E6; /* Now Blue 500 previously #61affe*/
+}
+.swagger-ui .opblock.opblock-post .opblock-summary-method {
+    background: #12805C; /* Now Green 600 previously #49cc90*/
+}
+.swagger-ui .opblock.opblock-put .opblock-summary-method {
+    background: #B06111; /* Now darker orange than defined in Spectrum previously #fca130*/
+}
+.swagger-ui .opblock.opblock-patch .opblock-summary-method {
+    background: #0F797D; /* Now Seafoam 600 previously #50e3c2*/
+}
+.swagger-ui .opblock.opblock-delete .opblock-summary-method {
+    background: #D7373F; /* Now Red 500 previously #f93e3e*/
+}
+.swagger-ui .opblock.opblock-head .opblock-summary-method {
+    background: #864CCC; /* Now Purple 500 Previously #9012fe*/
+}
+
+.swagger-ui span.opblock-summary-path > a > span {
+   font-weight: 600;
+   color: #4b4b4b; 
+}
+
+.swagger-ui .opblock .opblock-summary-operation-id, .swagger-ui .opblock .opblock-summary-path, .swagger-ui .opblock .opblock-summary-path__deprecated {
+    font-size: 16px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-flex: 0;
+    -ms-flex: 0 3 auto;
+    flex: 0 3 auto;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    word-break: break-all;
+    padding: 0 10px;
+    font-family: Source Code Pro,monospace;
+    font-weight: 600;
+    color: #3b4151;
+}
+
+.swagger-ui .opblock .opblock-summary-description {
+    font-size: 13px;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    font-family: Open Sans,sans-serif;
+    color: #3b4151;
+}
+
+code div{font-size: 14px !important;font-family:monospace;}
+
+
+
