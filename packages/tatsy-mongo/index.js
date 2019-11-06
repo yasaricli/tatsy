@@ -15,7 +15,7 @@ module.exports = {
         mongoGlobal.await('[%d/2] - Connecting to mongo', 1);
       }
 
-      mongoose.connect('mongodb://localhost:27017/test', {
+      mongoose.connect(config.mongoUrl, {
         useNewUrlParser: true,
         useUnifiedTopology: true
       });
