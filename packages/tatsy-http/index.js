@@ -72,6 +72,6 @@ module.exports = {
   },
 
   start() {
-    return app.listen(config.port, config.host);
+    return app.listen(config.port, config.bindIp);
   }
 };

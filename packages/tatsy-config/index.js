@@ -4,7 +4,8 @@ const path = require('path');
 // ENV VARIABLES
 const {
   PORT = 3000,
-  ROOT_URL = 'http://localhost',
+  BIND_IP = '127.0.0.1',
+  ROOT_URL = 'http://localhost:3000',
   NODE_ENV,
   MONGO_URL,
   MONGO_OPLOG_URL
@@ -39,10 +40,13 @@ const CONFIGS = {
   ..._getConfigFile(),
 
   // XXX: NOT CHANGED
-  // is in read-only mode
+  // --------- is in read-only mode
   
   // express port
   port: PORT,
+
+  // express listen ip
+  bindIp: BIND_IP,
 
   // Mongodb url and oplog url
   mongoUrl: MONGO_URL,
@@ -62,6 +66,6 @@ module.exports = {
   ...CONFIGS,
 
   // ROOT_URL
-  rootUrl: `${ROOT_URL}:${PORT}`,
-  apiUrl: `${ROOT_URL}:${PORT}/api`
+  rootUrl: ROOT_URL,
+  apiUrl: `${ROOT_URL}/api`
 };
