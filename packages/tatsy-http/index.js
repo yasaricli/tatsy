@@ -53,7 +53,7 @@ module.exports = {
   },
 
   static(url, dir) {
-    return app.use(url, express.static(dir))
+    return app.use(url, express.static(dir));
   },
   
   parser() {
