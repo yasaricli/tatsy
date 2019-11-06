@@ -98,7 +98,7 @@ ${content}("${_safeFileName(name)}", Tatsy);
       fs.appendFileSync(`${config.buildDir}/main.js`, lines.join('\n'), 'utf8');
 
       // success builder
-      return success();
+      return success && success();
     });
   });
 };
