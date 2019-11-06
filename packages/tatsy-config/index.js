@@ -5,6 +5,7 @@ const path = require('path');
 const {
   PORT = 3000,
   ROOT_URL = 'http://localhost',
+  NODE_ENV,
   MONGO_URL,
   MONGO_OPLOG_URL
 } = process.env;
@@ -28,7 +29,10 @@ const CONFIGS = {
   // Plugins default empty (tatsy-plugins)
   plugins: [],
 
+  // active verbose mode
   verbose: false,
+
+  // active all endpoint list docs
   docs: false,
 
   // overwrite previous config.
@@ -43,6 +47,9 @@ const CONFIGS = {
   // Mongodb url and oplog url
   mongoUrl: MONGO_URL,
   oplogUrl: MONGO_OPLOG_URL,
+
+  // Production or development
+  isProduction: NODE_ENV === 'production',
   
   // Application directories
   appDir: _appAbsolutePath('.'),
