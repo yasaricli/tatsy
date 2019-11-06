@@ -31,9 +31,8 @@ const enter = () => {
 const started = () => {
   return log(`
     - PORT: ${chalk.red(config.port)}
-    - HOST: ${chalk.green(config.host)}
+    - API: ${chalk.green(config.apiUrl)}
     - VERBOSE_MODE: ${chalk.yellow(config.verbose)}
-    - Api running at http://${config.host}:${config.port}/api
   `);
 };
 

@@ -1,6 +1,14 @@
 const fs = require('fs');
 const path = require('path');
 
+// ENV VARIABLES
+const {
+  PORT = 3000,
+  ROOT_URL = 'http://localhost',
+  MONGO_URL,
+  MONGO_OPLOG_URL
+} = process.env;
+
 const _appAbsolutePath = (p) => {
   return path.resolve(p);
 };
@@ -15,24 +23,37 @@ const _getConfigFile = () => {
   return { };
 };
 
-module.exports = {
-  port: 3000,
-  host: '127.0.0.1',
-
-  // show verbose logs
-  verbose: false,
-
-  // Tatsy Plugins use tatsy-plugins
-  plugins: [],
+const CONFIGS = {
   
-  // api docs
+  // Plugins default empty (tatsy-plugins)
+  plugins: [],
+
+  verbose: false,
   docs: false,
 
-  // overwrite previous
+  // overwrite previous config.
   ..._getConfigFile(),
 
-  // is in read-only mode.
+  // XXX: NOT CHANGED
+  // is in read-only mode
+  
+  // express port
+  port: PORT,
+
+  // Mongodb url and oplog url
+  mongoUrl: MONGO_URL,
+  oplogUrl: MONGO_OPLOG_URL,
+  
+  // Application directories
   appDir: _appAbsolutePath('.'),
   buildDir: _appAbsolutePath('.tatsy'),
   endpointsDir: _appAbsolutePath('endpoints/*.js')
+};
+
+module.exports = {
+  ...CONFIGS,
+
+  // ROOT_URL
+  rootUrl: `${ROOT_URL}:${PORT}`,
+  apiUrl: `${ROOT_URL}:${PORT}/api`
 };
