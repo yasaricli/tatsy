@@ -20,6 +20,7 @@
 		"tatsy-http": "^0.0.6",
 		"tatsy-logger": "^0.0.5",
 		"tatsy-mongo": "^0.0.2",
+		"tatsy-route": "^0.0.1",
 		"tatsy-watcher": "^0.0.5"
 	}
 }
