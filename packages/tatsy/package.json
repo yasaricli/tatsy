@@ -11,6 +11,7 @@
 		"test": "echo 'HOPS: implement me(tatsy)'"
 	},
 	"dependencies": {
+		"directory-exists": "^2.0.1",
 		"glob": "^7.1.5",
 		"mkdirp": "^0.5.1",
 		"nodemon": "^1.19.4",
