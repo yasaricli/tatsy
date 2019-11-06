@@ -19,13 +19,8 @@
 - [Defining Collection Routes](#defining-collection-routes)
 - [Defining Custom Routes](#defining-custom-routes)
   - [Defining Endpoints](#defining-endpoints)
-  - [Request and Response Structure](#request-and-response-structure)
-    - [`post`](#post)
-    - [`getAll`](#getall)
-    - [`get`](#get)
-    - [`put`](#put)
-    - [`delete`](#delete)
 - [Packages](#packages)
+- [Developer Resources](#developer-resources)
 - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
