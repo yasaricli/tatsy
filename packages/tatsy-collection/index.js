@@ -3,12 +3,12 @@ const { apiUrl } = require('./utils/shortcuts');
 
 module.exports = (name, options) => {
   const {
-    schema = {}, 
+    schema = {},
     schemaOptions = {},
     transform = (doc, obj) => obj
   } = options;
 
-  return (url, { Http, Mongo }) => {
+  return (url, { Http, Mongo }) => {
     const Model = Mongo.model(name, new Mongo.Schema(schema, {
       timestamps: true,
       versionKey: false,
