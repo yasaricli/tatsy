@@ -53,11 +53,11 @@ and then just run `yarn start` and go to http://localhost:3000/api
 ## Defining Collection Routes
 One of the most common uses for a REST API is exposing a set of operations on your collections.
 All available REST endpoints can be generated for a Mongo Collection using
-`Tatsy.addCollection(name, options)`.
+`Tatsy.Collection(name, options)`.
 
 ```javascript
 // articles.js | Given a URL "/articles/5"
-Tatsy.addCollection('articles', {
+Tatsy.Collection('articles', {
   schema: {
     title: String,
     author: String
@@ -74,7 +74,7 @@ Tatsy.addCollection('articles', {
 - `GET`, `PUT`, `PATCH` and `DELETE`
 
 ## Defining Custom Routes
-Routes are defined using `Tatsy.addRoute()`. A route consists of a path and a set of endpoints
+Routes are defined using `Tatsy.Route()`. A route consists of a path and a set of endpoints
 defined at that path.
 
 In this example we have a parameter named `_id`. If we navigate to the `/posts/5` URL in our browser,
@@ -83,7 +83,7 @@ inside of the GET endpoint function we can get the actual value of the `_id` fro
 
 ```javascript
 // posts.js | Given a URL "/posts/5"
-Tatsy.addRoute({
+Tatsy.Route({
   endpoints: {
     get(_id) {
       console.log(_id)
@@ -94,7 +94,7 @@ Tatsy.addRoute({
 
 ### Defining Endpoints
 
-The last parameter of `Tatsy.addRoute` is an object with properties corresponding to the supported
+The last parameter of `Tatsy.Route` is an object with properties corresponding to the supported
 HTTP methods. At least one method must have an endpoint defined on it. The following endpoints can
 be defined in Tatsy:
 - `getAll`

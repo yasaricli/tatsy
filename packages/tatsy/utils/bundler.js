@@ -19,6 +19,11 @@ const _getFile = (f) => {
   return fs.readFileSync(f, 'utf8');
 };
 
+const _getTemplate = (name) => {
+  const filePath = path.resolve(__dirname, `../templates/${name}.js`);
+  return _getFile(filePath);
+};
+
 const _clearBaseDir = (callback) => {
 
   // remove old dir.
@@ -36,10 +41,6 @@ const _clearBaseDir = (callback) => {
   });
 };
 
-const _getTemplate = (name) => {
-  return path.resolve(__dirname, `../templates/${name}.js`);
-};
-
 module.exports = (isStarted, success) => {
   _clearBaseDir(() => {
     const globOptions = {};
@@ -48,7 +49,7 @@ module.exports = (isStarted, success) => {
       const lines = [];
 
       // Main Start Add
-      lines.push(_getFile(_getTemplate('start')));
+      lines.push(_getTemplate('start', true));
 
       // Show started log
       if (isStarted) {
@@ -83,7 +84,7 @@ ${content}("${_safeFileName(name)}", Tatsy);
       }
 
       // Main End Add
-      lines.push(_getFile(_getTemplate('end')));
+      lines.push(_getTemplate('end'));
 
       // main file
       fs.appendFileSync(`${config.buildDir}/main.js`, lines.join('\n'), 'utf8');
