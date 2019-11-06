@@ -1,7 +1,7 @@
 const Tatsy = require('tatsy');
 
 // Mongo Connect
-Tatsy.Mongo.connect();
+Tatsy.Mongo.connect(isWatcher);
 
 // json, urlencoded parser
 Tatsy.Http.parser();

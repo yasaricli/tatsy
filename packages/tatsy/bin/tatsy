@@ -8,7 +8,7 @@ const config = require('tatsy-config');
 // Bundler func
 const bundler = require('../utils/bundler');
 
-bundler(true, () => {
+bundler(false, () => {
   const server = nodemon({
     script: `${config.buildDir}/main.js`,
   });
@@ -20,7 +20,7 @@ bundler(true, () => {
   return watcher(config.endpointsDir, () => {
 
     // Build scripts
-    return bundler(false, () => {
+    return bundler(true, () => {
 
       // Restart Server
       server.restart();

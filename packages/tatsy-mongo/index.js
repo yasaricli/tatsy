@@ -5,11 +5,13 @@ module.exports = {
   ...mongoose,
   
   // connect mongodb 
-  connect() {
+  connect(isWatcher) {
     const { connection } = mongoose;
 
     // Connecting await log
-    mongoGlobal.await('[%d/2] - Connecting to mongo', 1);
+    if (!isWatcher) {
+      mongoGlobal.await('[%d/2] - Connecting to mongo', 1);
+    }
 
     mongoose.connect('mongodb://localhost:27017/test', {
       useNewUrlParser: true,
@@ -17,7 +19,9 @@ module.exports = {
     });
 
     connection.on('open', function() {
-      mongoGlobal.success('[%d/2] - Connected to mongo server', 2);
+      if (!isWatcher) {
+        mongoGlobal.success('[%d/2] - Connected to mongo server', 2);
+      }
     });
 
     connection.on('error', function() {

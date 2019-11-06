@@ -19,8 +19,14 @@ const _getFile = (f) => {
   return fs.readFileSync(f, 'utf8');
 };
 
-const _getTemplate = (name) => {
+const _getTemplate = (name, beforeContent) => {
   const filePath = path.resolve(__dirname, `../templates/${name}.js`);
+
+  if (beforeContent) {
+    const mainContent = _getFile(filePath);
+    return `${beforeContent}\n${mainContent}`;
+  }
+
   return _getFile(filePath);
 };
 
@@ -41,7 +47,7 @@ const _clearBaseDir = (callback) => {
   });
 };
 
-module.exports = (isStarted, success) => {
+module.exports = (isWatcher, success) => {
   _clearBaseDir(() => {
     const globOptions = {};
 
@@ -49,10 +55,12 @@ module.exports = (isStarted, success) => {
       const lines = [];
 
       // Main Start Add
-      lines.push(_getTemplate('start', true));
+      lines.push(_getTemplate('start', `
+const isWatcher = ${isWatcher};
+`));
 
       // Show started log
-      if (isStarted) {
+      if (!isWatcher) {
         logger.started(files);
       }
 
@@ -67,7 +75,7 @@ module.exports = (isStarted, success) => {
         }
 
         // Show Build log
-        if (isStarted) {
+        if (!isWatcher) {
           logger.building(f);
         }
 
@@ -75,11 +83,11 @@ module.exports = (isStarted, success) => {
 (() => {
 ${content}("${_safeFileName(name)}", Tatsy);
 })();
-        `);
+`);
       });
 
       // Show Build log
-      if (isStarted) {
+      if (!isWatcher) {
         logger.enter();
       }
 
