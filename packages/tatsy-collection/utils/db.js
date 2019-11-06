@@ -11,11 +11,11 @@ module.exports = {
       useUnifiedTopology: true
     });
 
-    connection.on("open", function(ref) {
+    connection.on('open', function() {
       mongoGlobal.success('[%d/2] - Connected to mongo server', 2);
     });
-    
-    connection.on("error", function(err) {
+
+    connection.on('error', function() {
       mongoGlobal.error('[%d/2] - Could not connect to mongo server!', 2);
     });
 
