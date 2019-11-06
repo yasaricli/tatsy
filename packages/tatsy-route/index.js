@@ -48,5 +48,5 @@ module.exports = (route) => {
         return res.json(del(_id));
       });
     }
-  }
-}
+  };
+};
