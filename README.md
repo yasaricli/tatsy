@@ -5,7 +5,7 @@
 <p align="center">
   A simple interface for creating REST APIs
   <br>
-  <a href="https://tatsy.js.org/"><strong>Website</strong></a> | <a href="https://tatsy.js.org/docs"><strong>Docs</strong></a>
+  <a href="https://tatsy.js.org/"><strong>Website</strong></a> | <a href="https://github.com/tsepeti/tatsy/wiki"><strong>Wiki</strong></a>
 </p>
 
 ## Status
