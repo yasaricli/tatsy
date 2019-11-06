@@ -9,5 +9,8 @@
 * Tatsy exports [#8](https://github.com/tsepeti/tatsy/issues/8)
 * Mongodb connection log [#9](https://github.com/tsepeti/tatsy/issues/9)
 * MONGO_URL [#10](https://github.com/tsepeti/tatsy/issues/10)
+* Docs UI [#12](https://github.com/tsepeti/tatsy/issues/12)
+
+
 
 #### See the milestone section for more details [tatsy@0.1.0](https://github.com/tsepeti/tatsy/milestone/1)
