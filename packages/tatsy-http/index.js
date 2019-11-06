@@ -26,18 +26,6 @@ module.exports = {
     return app.put(url, callback);
   },
 
-  docs() {
-
-    // active template
-    this.templateEngine();
-
-    return app.get('/', (req, res) => {
-      return res.render('index', {
-        endpoints: listEndpoints(app)
-      });
-    });
-  },
-
   all() {
     return app.get('*', (req, res) => {
       return res.json({
@@ -47,6 +35,25 @@ module.exports = {
         }
       });
     });
+  },
+
+  docs() {
+
+    // active template
+    this.templateEngine();
+
+    // static files
+    this.static('/docs-static', path.resolve(__dirname, 'static'));
+
+    return app.get('/', (req, res) => {
+      return res.render('index', {
+        endpoints: listEndpoints(app)
+      });
+    });
+  },
+
+  static(url, dir) {
+    return app.use(url, express.static(dir))
   },
   
   parser() {
