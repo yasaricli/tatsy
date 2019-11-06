@@ -1,21 +1,21 @@
-const { apiUrl } = require('./shortcuts');
+const { apiUrl } = require('./utils/shortcuts');
 
 module.exports = (route) => {
   const { endpoints = {} } = route;
 
-  return (http, url) => {
+  return (url, { Http }) => {
     const { getAll, get, post, put, del } = endpoints;
 
     // get /api/
     if (getAll) {
-      http.get(apiUrl(url), (req, res) => {
+      Http.get(apiUrl(url), (req, res) => {
         return res.json(getAll(req, res));
       });
     }
 
     // get /api/:_id
     if (get) {
-      http.get(apiUrl(url, '_id'), (req, res) => {
+      Http.get(apiUrl(url, '_id'), (req, res) => {
         const { _id } = req.params;
         return res.json(get(_id));
       });
@@ -23,7 +23,7 @@ module.exports = (route) => {
 
     // post /api
     if (post) {
-      http.post(apiUrl(url), (req, res) => {
+      Http.post(apiUrl(url), (req, res) => {
         const { body } = req;
 
         return res.json(post(body));
@@ -32,7 +32,7 @@ module.exports = (route) => {
 
     // put /api/:_id
     if (put) {
-      http.put(apiUrl(url, '_id'), (req, res) => {
+      Http.put(apiUrl(url, '_id'), (req, res) => {
         const { _id } = req.params;
         const { body } = req;
 
@@ -42,11 +42,11 @@ module.exports = (route) => {
 
     // delete /api/:_id
     if (del) {
-      http.delete(apiUrl(url, '_id'), (req, res) => {
+      Http.delete(apiUrl(url, '_id'), (req, res) => {
         const { _id } = req.params;
 
         return res.json(del(_id));
       });
     }
-  };
-};
+  }
+}
