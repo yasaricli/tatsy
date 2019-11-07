@@ -71,10 +71,10 @@ const _builder = (options) => {
   return _mkdirTatsyFolder((error, files) => {
     const lines = [];
 
-    // Main Start Add
-    lines.push(_getTemplate('start', `
-      const isWatcher = ${isWatcher};
-    `));
+// Main Start Add
+lines.push(_getTemplate('start', `
+  const isWatcher = ${isWatcher};
+`));
 
     if (isProduction) {
       logger.prodBuildingGlobal.success('[%d/5] - .tatsy folder created', 2);
@@ -88,11 +88,11 @@ const _builder = (options) => {
       // Show Build log
       if (!isWatcher && !isProduction) logger.building(f);
 
-      lines.push(`
-        (() => {
-          ${content}("${_safeFileName(name)}", Tatsy);
-        })();
-      `);
+lines.push(`
+(() => {
+  ${content}("${_safeFileName(name)}", Tatsy);
+})();
+`);
     });
 
     // Main End Add

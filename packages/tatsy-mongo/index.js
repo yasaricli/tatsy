@@ -5,6 +5,26 @@ const { mongoGlobal } = require('tatsy-logger');
 module.exports = {
   ...mongoose,
 
+  /*
+   * All Collections object store.
+   */
+  Collections: {},
+
+  // return Mongoose model
+  collection(name, schema, transform, schemaOptions) {
+    const Model = this.model(name, new this.Schema(schema, {
+      timestamps: true,
+      versionKey: false,
+      toJSON: { transform },
+      ...schemaOptions
+    }));
+
+    // Set Model Collections
+    this.Collections[name] = Model;
+
+    return Model;
+  },
+  
   // connect mongodb
   connect(isWatcher) {
     const { connection } = mongoose;
