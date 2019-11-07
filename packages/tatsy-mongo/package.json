@@ -1,6 +1,6 @@
 {
   "name": "tatsy-mongo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "mongoose": "^5.7.8",
-    "tatsy-config": "^0.0.4",
-    "tatsy-logger": "^0.0.5"
+    "tatsy-config": "^0.0.5",
+    "tatsy-logger": "^0.0.6"
   }
 }
