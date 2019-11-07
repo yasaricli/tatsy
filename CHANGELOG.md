@@ -3,6 +3,8 @@
 
 ## v.NEXT
 
+
+## tatsy@0.1.0
 * Collection transform [#1](https://github.com/tsepeti/tatsy/issues/1)
 * List endpoints on / page [#3](https://github.com/tsepeti/tatsy/issues/3)
 * Production env [#6](https://github.com/tsepeti/tatsy/issues/6)
