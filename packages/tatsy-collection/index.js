@@ -52,9 +52,10 @@ module.exports = (name, options) => {
 
       // create model
       const doc = new Model(body);
-
+      
       if (handler) {
         return res.json(await handler.call({
+          model: Model,
           collections: Mongo.Collections,
         }, body));
       }

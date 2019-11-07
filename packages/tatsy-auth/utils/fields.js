@@ -4,7 +4,7 @@ const STRING_REQUIRED = {
   trim: true
 };
 
-const TOKENS_FIELD = [{ token: { type:String, required: true } } ];
+const TOKENS_FIELD = [{ token: { type: String, required: true } } ];
 
 module.exports = {
   STRING_REQUIRED,

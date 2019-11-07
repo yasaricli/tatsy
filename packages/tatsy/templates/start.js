@@ -15,7 +15,7 @@ if (Tatsy.Config.docs) {
 (() => {
   
   // Users register and profile 
-  Tatsy.Collection('users', Tatsy.Auth)("users", Tatsy);
+  Tatsy.Collection('users', Tatsy.Auth.Collection)("users", Tatsy);
 
   // Login Route (POST, GET)
   Tatsy.Route({ endpoints: Tatsy.Auth.login })("login", Tatsy);
