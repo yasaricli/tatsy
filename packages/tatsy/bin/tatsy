@@ -1,55 +1,15 @@
 #!/usr/bin/env node
-const nodemon = require('nodemon');
-const directoryExists = require('directory-exists');
 const program = require('commander');
 
-// Official packages
-const { watcher } = require('tatsy-watcher');
-const config = require('tatsy-config');
-
 // Bundler func
-const bundler = require('../utils/bundler');
+const { start, build } = require('../utils/bundler');
 
 program
-  .option('--start', 'Start the tatsy server (Watch or Prod)')
-  .option('--build', 'Build tatsy api');
+  .option('--start', 'Run this project in local development mode.')
+  .option('--build', 'Build this project for all platforms.');
 
 program.parse(process.argv);
 
-// Bundler
-((isProduction) => {
-
-  if (program.build) {
-    return bundler(false);
-  }
-
-  if (program.start) {
-    if (isProduction) {
-      return directoryExists(config.buildDir, (error, result) => {
-        if (result) {
-          return require(config.mainJs);
-        }
-      })
-    }
-    
-    return bundler(false, () => {
-      const server = nodemon({
-        script: `${config.buildDir}/main.js`,
-      });
-      
-      // on events
-      server.on('quit', () => process.exit());
-    
-      // Changed, Added, Removed Watch
-      return watcher(config.endpointsDir, () => {
-    
-        // Build scripts
-        return bundler(true, () => {
-    
-          // Restart Server
-          server.restart();
-        });
-      });
-    });
-  }
-})(config.isProduction);
+// Commands
+if (program.start) start();
+if (program.build) build();

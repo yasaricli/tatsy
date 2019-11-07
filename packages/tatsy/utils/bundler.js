@@ -6,10 +6,13 @@ const path = require('path');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const glob = require('glob');
+const nodemon = require('nodemon');
+const directoryExists = require('directory-exists');
 
 // Official packages
 const config = require('tatsy-config');
 const logger = require('tatsy-logger');
+const { watcher } = require('tatsy-watcher');
 
 const _safeFileName = (name) => {
   return name.replace('.js', '');
@@ -47,58 +50,129 @@ const _clearBaseDir = (callback) => {
   });
 };
 
-module.exports = (isWatcher, success) => {
-  _clearBaseDir(() => {
-    const globOptions = {};
+// create .tatsy folder
+const _mkdirTatsyFolder = (callback) => {
+  return _clearBaseDir(() => {
+    glob(config.endpointsDir, { }, callback);
+  });
+}
 
-    glob(config.endpointsDir, globOptions, (error, files) => {
-      const lines = [];
+const _builder = (options) => {
+  const {
+    isWatcher = false,
+    isProduction,
+    onSuccess
+  } = options;
 
-      // Main Start Add
-      lines.push(_getTemplate('start', `
-const isWatcher = ${isWatcher};
-`));
+  if (isProduction) {
+    logger.prodBuildingGlobal.await('[%d/5] - Creating an optimized production build', 1);
+  }
 
-      // Show started log
-      if (!isWatcher) {
-        logger.started(files);
-      }
+  return _mkdirTatsyFolder((error, files) => {
+    const lines = [];
 
-      files.forEach((f) => {
-        const name = path.basename(f);
-        const content = _getFile(f);
-        const buildFile = `${config.filesDir}/${name}`;
+    // Main Start Add
+    lines.push(_getTemplate('start', `
+      const isWatcher = ${isWatcher};
+    `));
 
-        // save decoding file
-        if (config.saveFile) {
-          fs.appendFileSync(buildFile, content, 'utf8');
-        }
-
-        // Show Build log
-        if (!isWatcher) {
-          logger.building(f);
-        }
-
-        lines.push(`
-(() => {
-${content}("${_safeFileName(name)}", Tatsy);
-})();
-`);
-      });
+    if (isProduction) {
+      logger.prodBuildingGlobal.success('[%d/5] - .tatsy folder created', 2);
+      logger.prodBuildingGlobal.await('[%d/5] - Creating an main.js', 3);
+    }
+  
+    files.forEach((f) => {
+      const name = path.basename(f);
+      const content = _getFile(f);
 
       // Show Build log
-      if (!isWatcher) {
-        logger.enter();
+      if (!isWatcher && !isProduction) logger.building(f);
+
+      lines.push(`
+        (() => {
+          ${content}("${_safeFileName(name)}", Tatsy);
+        })();
+      `);
+    });
+
+    // Main End Add
+    lines.push(_getTemplate('end'));
+
+    // main file
+    fs.appendFileSync(config.mainJs, lines.join('\n'), 'utf8');
+
+    if (isProduction) {
+      logger.prodBuildingGlobal.success('[%d/5] - successfully created main.js.', 4);
+    }
+
+    // success builder
+    return onSuccess();
+  })
+}
+
+// tatsy --start
+const start = () => {
+  const { isProduction } = config;
+
+  /*
+   * Production only server started
+   * disable watcher and nodemon!
+   */
+  if (isProduction) {
+    return directoryExists(config.buildDir, (error, result) => {
+      if (result) {
+
+        // production started
+        logger.prodStarted();
+
+        // RUN API
+        return require(config.mainJs);
       }
 
-      // Main End Add
-      lines.push(_getTemplate('end'));
+      return logger.errorTotsyFolder();
+    })
+  }
 
-      // main file
-      fs.appendFileSync(`${config.buildDir}/main.js`, lines.join('\n'), 'utf8');
+  /*
+   * Development only server started
+   * watcher and active nodemon
+   */
+  logger.devStarted();
 
-      // success builder
-      return success && success();
-    });
+  return _builder({
+    isProduction,
+    isWatcher: false,
+    onSuccess() {
+      const server = nodemon({
+        script: config.mainJs,
+      });
+
+      server.on('quit', () => process.exit());
+
+      return watcher(config.endpointsDir, () => {
+        return _builder({
+          isWatcher: true,
+          onSuccess() {
+            return server.restart();
+          }
+        });
+      });
+    }
+  })
+}
+
+// tatsy --build
+const build = () => {
+  return _builder({
+    isProduction: true,
+    isWatcher: false,
+    onSuccess() {
+      logger.prodBuildingGlobal.success('[%d/5] - Compiled successfully.', 5);
+    }
   });
+}
+
+module.exports = {
+  start,
+  build
 };

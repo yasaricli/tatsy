@@ -11,6 +11,11 @@ const buildingGlobal = new Signale({
   scope: 'Building'
 });
 
+
+const prodBuildingGlobal = new Signale({
+  scope: 'Production Building'
+});
+
 const mongoGlobal = new Signale({
   scope: 'Mongodb'
 });
@@ -28,13 +33,25 @@ const enter = () => {
   return log('\n');
 };
 
-const started = () => {
+const devStarted = () => {
   return log(`
-    - PORT: ${chalk.red(config.port)}
-    - MONGO: ${chalk.green(config.mongoUrl || '-')}
-    - OPLOG: ${chalk.green(config.oplogUrl || '-')}
-    - DOCS: ${chalk.green(config.docs ? config.rootUrl : '-')}
-    - API: ${chalk.green(config.apiUrl)}
+    - Mode: Development Mode (Watch)
+    - Port: ${chalk.red(config.port)}
+    - Mongo: ${chalk.green(config.mongoUrl || '-')}
+    - Mongo Oplog: ${chalk.green(config.oplogUrl || '-')}
+    - Docs: ${chalk.green(config.docs ? config.rootUrl : '-')}
+    - Api: ${chalk.green(config.apiUrl)}
+  `);
+};
+
+const prodStarted = () => {
+  return log(`
+    - Mode: Production Mode
+    - Port: ${chalk.red(config.port)}
+    - Mongo: ${chalk.green(config.mongoUrl || '-')}
+    - Mongo Oplog: ${chalk.green(config.oplogUrl || '-')}
+    - Docs: ${chalk.green(config.docs ? config.rootUrl : '-')}
+    - Api: ${chalk.green(config.apiUrl)}
   `);
 };
 
@@ -54,13 +71,24 @@ const watcherAdded = (path) => {
   return watcherGlobal.success(`${_getFileName(path)} added successful`);
 };
 
+const errorTotsyFolder = () => {
+  return log(`
+    * Could not find a valid build in the ${chalk.red(config.buildDir)} directory!
+    * Try building your app with ${chalk.green('tatsy build')} before starting the server.
+  `);
+}
+
 module.exports = {
   log,
   enter,
-  started,
+  devStarted,
+  prodStarted,
   building,
+  errorTotsyFolder,
   watcherChanged,
   watcherRemoved,
   watcherAdded,
-  mongoGlobal
+  mongoGlobal,
+  buildingGlobal,
+  prodBuildingGlobal
 };
