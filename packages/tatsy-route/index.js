@@ -3,19 +3,21 @@ const { apiUrl } = require('./utils/shortcuts');
 module.exports = (route) => {
   const { endpoints = {} } = route;
 
-  return (url, { Http }) => {
+  return (url, { Http, Mongo }) => {
     const list = Object.keys(endpoints);
 
     return list.forEach((key) => {
-      const handler = Http[key == 'getAll' ? 'get' : key];
+      const fn = Http[key == 'getAll' ? 'get' : key];
     
-      if (handler) {
-        handler(apiUrl(url, key), (req, res) => {
-          const fn = endpoints[key];
-          return res.json(fn(req, res));
+      if (fn) {
+        fn(apiUrl(url, key), (req, res) => {
+          const handler = endpoints[key].bind({
+            collections: Mongo.Collections
+          });
+
+          return res.json(handler(req, res));
         });
       }
     });
-
   };
 };
