@@ -11,5 +11,15 @@ if (Tatsy.Config.docs) {
   Tatsy.Http.docs();
 }
 
-// Auth Package
-Tatsy.Auth(Tatsy);
+// AUTH /api/users, /api/login, /api/logout 
+(() => {
+  
+  // Users register and profile 
+  Tatsy.Collection('users', Tatsy.Auth)("users", Tatsy);
+
+  // Login Route (POST, GET)
+  Tatsy.Route({ endpoints: Tatsy.Auth.login })("login", Tatsy);
+
+  // Logout Route
+  Tatsy.Route({ endpoints: Tatsy.Auth.logout })("logout", Tatsy);
+})();

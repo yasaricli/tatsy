@@ -17,6 +17,7 @@
 		"mkdirp": "^0.5.1",
 		"nodemon": "^1.19.4",
 		"rimraf": "^3.0.0",
+		"tatsy-auth": "^0.0.1",
 		"tatsy-collection": "^0.0.9",
 		"tatsy-config": "^0.0.5",
 		"tatsy-http": "^0.0.7",
