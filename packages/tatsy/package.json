@@ -1,6 +1,6 @@
 {
 	"name": "tatsy",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "A simple interface for creating REST APIs",
 	"main": "index.js",
 	"license": "MIT",
@@ -17,12 +17,12 @@
 		"mkdirp": "^0.5.1",
 		"nodemon": "^1.19.4",
 		"rimraf": "^3.0.0",
-		"tatsy-collection": "^0.0.8",
+		"tatsy-collection": "^0.0.9",
 		"tatsy-config": "^0.0.5",
 		"tatsy-http": "^0.0.7",
-		"tatsy-logger": "^0.0.6",
-		"tatsy-mongo": "^0.0.3",
+		"tatsy-logger": "^0.0.7",
+		"tatsy-mongo": "^0.0.4",
 		"tatsy-route": "^0.0.2",
-		"tatsy-watcher": "^0.0.6"
+		"tatsy-watcher": "^0.0.7"
 	}
 }
