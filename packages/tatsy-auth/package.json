@@ -1,0 +1,13 @@
+{
+  "name": "tatsy-auth",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'HOPS: implement me(tatsy-auth)'"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

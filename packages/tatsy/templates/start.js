@@ -10,3 +10,6 @@ Tatsy.Http.parser();
 if (Tatsy.Config.docs) {
   Tatsy.Http.docs();
 }
+
+// Auth Package
+Tatsy.Auth(Tatsy);
