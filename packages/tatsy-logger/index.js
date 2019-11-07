@@ -71,7 +71,7 @@ const watcherAdded = (path) => {
   return watcherGlobal.success(`${_getFileName(path)} added successful`);
 };
 
-const errorTotsyFolder = () => {
+const errorTatsyFolder = () => {
   return log(`
     * Could not find a valid build in the ${chalk.red(config.buildDir)} directory!
     * Try building your app with ${chalk.green('tatsy build')} before starting the server.
@@ -84,7 +84,7 @@ module.exports = {
   devStarted,
   prodStarted,
   building,
-  errorTotsyFolder,
+  errorTatsyFolder,
   watcherChanged,
   watcherRemoved,
   watcherAdded,

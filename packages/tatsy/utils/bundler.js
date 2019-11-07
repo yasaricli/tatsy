@@ -129,7 +129,7 @@ const start = () => {
         return require(config.mainJs);
       }
 
-      return logger.errorTotsyFolder();
+      return logger.errorTatsyFolder();
     })
   }
 
