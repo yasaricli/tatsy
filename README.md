@@ -39,7 +39,7 @@ and add a script to your **package.json** like this:
 
 ```JSON
 "scripts": {
-  "start": "tatsy"
+  "start": "tatsy --start"
 },
 ```
 
