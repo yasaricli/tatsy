@@ -39,7 +39,8 @@ and add a script to your **package.json** like this:
 
 ```JSON
 "scripts": {
-  "start": "tatsy --start"
+  "start": "tatsy --start",
+  "build": "tatsy --build",
 },
 ```
 
