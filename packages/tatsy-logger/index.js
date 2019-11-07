@@ -76,7 +76,7 @@ const errorTatsyFolder = () => {
     * Could not find a valid build in the ${chalk.red(config.buildDir)} directory!
     * Try building your app with ${chalk.green('tatsy build')} before starting the server.
   `);
-}
+};
 
 module.exports = {
   log,

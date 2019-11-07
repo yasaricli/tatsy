@@ -55,7 +55,7 @@ const _mkdirTatsyFolder = (callback) => {
   return _clearBaseDir(() => {
     glob(config.endpointsDir, { }, callback);
   });
-}
+};
 
 const _builder = (options) => {
   const {
@@ -80,7 +80,7 @@ const _builder = (options) => {
       logger.prodBuildingGlobal.success('[%d/5] - .tatsy folder created', 2);
       logger.prodBuildingGlobal.await('[%d/5] - Creating an main.js', 3);
     }
-  
+
     files.forEach((f) => {
       const name = path.basename(f);
       const content = _getFile(f);
@@ -107,12 +107,12 @@ const _builder = (options) => {
 
     // success builder
     return onSuccess();
-  })
-}
+  });
+};
 
 // tatsy --start
 const start = () => {
-  const { isProduction } = config;
+  const { isProduction } = config;
 
   /*
    * Production only server started
@@ -130,7 +130,7 @@ const start = () => {
       }
 
       return logger.errorTatsyFolder();
-    })
+    });
   }
 
   /*
@@ -140,7 +140,7 @@ const start = () => {
   logger.devStarted();
 
   return _builder({
-    isProduction,
+    isProduction,
     isWatcher: false,
     onSuccess() {
       const server = nodemon({
@@ -158,8 +158,8 @@ const start = () => {
         });
       });
     }
-  })
-}
+  });
+};
 
 // tatsy --build
 const build = () => {
@@ -170,7 +170,7 @@ const build = () => {
       logger.prodBuildingGlobal.success('[%d/5] - Compiled successfully.', 5);
     }
   });
-}
+};
 
 module.exports = {
   start,
