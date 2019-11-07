@@ -71,8 +71,8 @@ const _builder = (options) => {
   return _mkdirTatsyFolder((error, files) => {
     const lines = [];
 
-// Main Start Add
-lines.push(_getTemplate('start', `
+    // Main Start Add
+    lines.push(_getTemplate('start', `
   const isWatcher = ${isWatcher};
 `));
 
@@ -88,7 +88,7 @@ lines.push(_getTemplate('start', `
       // Show Build log
       if (!isWatcher && !isProduction) logger.building(f);
 
-lines.push(`
+      lines.push(`
 (() => {
   ${content}("${_safeFileName(name)}", Tatsy);
 })();
