@@ -19,7 +19,7 @@ module.exports = (name, options) => {
     // getAll
     Http.get(apiUrl(url), (req, res) => {
       Model.find({ }, (err, list) => {
-        res.json(returnJSON('success', list));
+        return res.json(returnJSON('success', list));
       });
     });
 
@@ -31,7 +31,7 @@ module.exports = (name, options) => {
           return res.json(returnSuccess(doc));
         }
 
-        return res.json(returnFail(name));
+        return res.status(404).json(returnFail(name));
       });
     });
 
@@ -57,7 +57,7 @@ module.exports = (name, options) => {
           return res.json(returnSuccess(data));
         }
 
-        return res.json(returnFail(_id));
+        return res.status(404).json(returnFail(_id));
       });
     });
 
@@ -70,7 +70,7 @@ module.exports = (name, options) => {
           return res.json(returnSuccess(data));
         }
 
-        return res.json(returnFail(_id));
+        return res.status(404).json(returnFail(_id));
       });
     });
   };

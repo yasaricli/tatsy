@@ -16,7 +16,7 @@
     "lint:fix": "eslint . --fix",
     "jest:coverage": "jest --coverage",
     "update-readme-toc": "doctoc README.md",
-    "git:pre-commit": "npm-run-all lint:fix lerna:test"
+    "git:pre-commit": "npm-run-all lerna:clean lint:fix lerna:test"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
