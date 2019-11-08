@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "tatsy-shortcuts": "^0.0.1",
     "validator": "^12.0.0"
   }
 }

@@ -1,28 +1,28 @@
-const returnJSON = (status, data) => {
+const _return = (status, data) => {
   return {
     status,
     data
   };
 };
 
-const returnSuccess = (data) => {
-  return {
-    status: 'success',
-    data
-  };
+const success = (data) => {
+  return _return('status', data);
 };
 
-const returnFail = (name) => {
-  return {
-    status: 'fail',
-    data: {
-      message: `${name} not found`
-    }
-  };
+const fail = (name) => {
+  return _return('fail', {
+    message: `${name} not found`
+  });
+};
+
+const error = (message) => {
+  return _return('error', {
+    message
+  });
 };
 
 module.exports = {
-  returnJSON,
-  returnSuccess,
-  returnFail
+  success,
+  fail,
+  error
 };

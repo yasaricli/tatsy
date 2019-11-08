@@ -1,6 +1,7 @@
 const validator = require('validator');
 const Bcrypt = require('bcryptjs');
 
+const { returns } = require('tatsy-shortcuts');
 const { STRING_REQUIRED, TOKENS_FIELD } = require('./utils/fields');
 
 module.exports = {
@@ -18,93 +19,53 @@ module.exports = {
 
     endpoints: {
       async post(body) {
-        const { email, password } = body;
+        const { email = '', password = '' } = body;
 
-        if (validator.isEmail(email)) {
-          const user = await this.collections.users.findOne({ email });
+        // default status code
+        this.res.status(400);
 
-          // User found then
-          if (user) {
-
-            // Bad Request
-            this.res.status(400);
-
-            return {
-              status: 'error',
-              data: {
-                message: 'User already registered!'
-              }
-            };
-          }
-
-          if (validator.isEmpty(password)) {
-
-            // Bad Request
-            this.res.status(400);
-
-            return {
-              status: 'error',
-              data: {
-                message: 'Please enter your password!'
-              }
-            };
-          }
-
-          if (validator.equals(password.toLowerCase(), 'password')) {
-
-            // Bad Request
-            this.res.status(400);
-
-            return {
-              status: 'error',
-              data: {
-                message: 'Password is invalid!'
-              }
-            };
-          }
-
-          if (validator.contains(password.toLowerCase(), 'password')) {
-
-            // Bad Request
-            this.res.status(400);
-            
-            return {
-              status: 'error',
-              data: {
-                message: 'Password should not contain password!'
-              }
-            };
-          }
-
-          // User Model
-          const doc = new this.model({
-            email,
-            password: Bcrypt.hashSync(body.password, 10)
-          });
-
-          // Save User
-          const result = await doc.save();
-
-          // set status 201
-          this.res.status(201);
-
-          return {
-            status: 'success',
-            data: {
-              _id: result._id,
-              email: result.email
-            }
-          };
+        if (!validator.isEmail(email)) {
+          return returns.error('Email Address must be valid');
         }
 
-        return {
-          status: 'error',
-          data: {
-            message: 'Email Address must be valid'
-          }
-        };
+        // Get user
+        const user = await this.collections.users.findOne({ email });
+
+        // User found then
+        if (user) {
+          return returns.error('User already registered!');
+        }
+
+        if (validator.isEmpty(password)) {
+          return returns.error('Please enter your password!');
+        }
+
+        if (validator.equals(password.toLowerCase(), 'password')) {
+          return returns.error('Password is invalid!');
+        }
+
+        if (validator.contains(password.toLowerCase(), 'password')) {
+          return returns.error('Password should not contain password!');
+        }
+
+        // override 400 status code to 201
+        this.res.status(201);
+
+        // User Model
+        const doc = new this.model({
+          email,
+          password: Bcrypt.hashSync(body.password, 10)
+        });
+
+        // Create new user
+        const result = await doc.save();
+
+        return returns.success({
+          _id: result._id,
+          email: result.email
+        });
       },
-    
+
       get(_id) {
         return {
           _id
