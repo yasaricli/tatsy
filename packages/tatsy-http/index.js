@@ -10,20 +10,20 @@ const config = require('tatsy-config');
 const app = express();
 
 module.exports = {
-  get(url, callback) {
-    return app.get(url, callback);
+  get(url, auth, callback) {
+    return app.get(url, auth, callback);
   },
 
-  post(url, callback) {
-    return app.post(url, callback);
+  post(url, auth, callback) {
+    return app.post(url, auth, callback);
   },
 
-  delete(url, callback) {
-    return app.delete(url, callback);
+  delete(url, auth, callback) {
+    return app.delete(url, auth, callback);
   },
 
-  put(url, callback) {
-    return app.put(url, callback);
+  put(url, auth, callback) {
+    return app.put(url, auth, callback);
   },
 
   all() {

@@ -8,17 +8,18 @@
   "parser": "babel-eslint",
   "plugins": ["monorepo"],
   "globals": {
-      "define": true,
-      "SharedArrayBuffer": true
+    "define": true,
+    "SharedArrayBuffer": true
   },
   "rules": {
-      "indent": [ "error", 2 ],
-  "quotes": [ "error", "single" ],
-      "semi": [ "error", "always" ]
+    "indent": [ "error", 2 ],
+    "quotes": [ "error", "single" ],
+    "semi": [ "error", "always" ],
+    "require-atomic-updates": "off"
   },
   "env": {
-      "node": true,
-      "es6": true,
-      "jest": true
+    "node": true,
+    "es6": true,
+    "jest": true
   }
 }

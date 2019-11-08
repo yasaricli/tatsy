@@ -1,8 +1,11 @@
+const { middlewares } = require('tatsy-shortcuts');
+
 const { returnJSON, returnSuccess, returnFail } = require('./utils/returns');
 const { apiUrl } = require('./utils/shortcuts');
 
 module.exports = (name, options) => {
   const {
+    authRequired = false,
     schema = {},
     schemaOptions = {},
     transform = (doc, obj) => obj,
@@ -11,9 +14,10 @@ module.exports = (name, options) => {
 
   return (url, { Http, Mongo }) => {
     const Model = Mongo.collection(name, schema, transform, schemaOptions);
+    const auth = middlewares.authenticate(authRequired, Mongo);
 
     // getAll
-    Http.get(apiUrl(url), async (req, res) => {
+    Http.get(apiUrl(url), auth, async (req, res) => {
       const handler = endpoints.getAll;
 
       if (handler) {
@@ -28,7 +32,7 @@ module.exports = (name, options) => {
       });
     });
 
-    Http.get(apiUrl(url, '_id'), async (req, res) => {
+    Http.get(apiUrl(url, '_id'), auth, async (req, res) => {
       const handler = endpoints.get;
       const { _id } = req.params;
 
@@ -48,7 +52,7 @@ module.exports = (name, options) => {
       });
     });
 
-    Http.post(apiUrl(url), async (req, res) => {
+    Http.post(apiUrl(url), auth, async (req, res) => {
       const handler = endpoints.post;
       const { body } = req;
 
@@ -69,7 +73,7 @@ module.exports = (name, options) => {
       });
     });
 
-    Http.put(apiUrl(url, '_id'), async (req, res) => {
+    Http.put(apiUrl(url, '_id'), auth, async (req, res) => {
       const handler = endpoints.put;
       const { _id } = req.params;
       const { body } = req;
@@ -91,7 +95,7 @@ module.exports = (name, options) => {
       });
     });
 
-    Http.delete(apiUrl(url, '_id'), async (req, res) => {
+    Http.delete(apiUrl(url, '_id'), auth, async (req, res) => {
       const handler = endpoints.delete;
       const { _id } = req.params;
 

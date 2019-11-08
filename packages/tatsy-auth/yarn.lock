@@ -6,11 +6,6 @@ bcryptjs@^2.4.3:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
 
-tatsy-shortcuts@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/tatsy-shortcuts/-/tatsy-shortcuts-0.0.1.tgz#a5459e8f8d81127335a40bf366d1833c266b05d6"
-  integrity sha512-zmQ4bZHdkyX8xs0WmfTkTJS/fhaXHl/oSasYw4SObIyAsBWLewMtrjZgZ8AgwptbVPnkj9Ry99+RMwRTBZBi4Q==
-
 validator@^12.0.0:
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-12.0.0.tgz#fb33221f5320abe2422cda2f517dc3838064e813"

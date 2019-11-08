@@ -1,7 +1,7 @@
 const validator = require('validator');
-const Bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
-const { returns } = require('tatsy-shortcuts');
+const { returns, random } = require('tatsy-shortcuts');
 const { STRING_REQUIRED, TOKENS_FIELD } = require('./utils/fields');
 
 module.exports = {
@@ -28,16 +28,18 @@ module.exports = {
           return returns.error('Email Address must be valid');
         }
 
+        if (validator.isEmpty(password)) {
+          return returns.error('Please enter your password!');
+        }
+
         // Get user
         const user = await this.collections.users.findOne({ email });
 
-        // User found then
+        /*
+         * User checks and password check
+         */
         if (user) {
           return returns.error('User already registered!');
-        }
-
-        if (validator.isEmpty(password)) {
-          return returns.error('Please enter your password!');
         }
 
         if (validator.equals(password.toLowerCase(), 'password')) {
@@ -54,7 +56,7 @@ module.exports = {
         // User Model
         const doc = new this.model({
           email,
-          password: Bcrypt.hashSync(body.password, 10)
+          password: bcrypt.hashSync(body.password, 10)
         });
 
         // Create new user
@@ -75,18 +77,72 @@ module.exports = {
   },
 
   login: {
-    post({ body }) {
-      return {
-        body
-      };
+    async post({ body }) {
+      const { email = '', password = '' } = body;
+
+      // set default status 400
+      this.res.status(400);
+
+      if (!validator.isEmail(email)) {
+        return returns.error('Email Address must be valid');
+      }
+
+      if (validator.isEmpty(password)) {
+        return returns.error('Please enter your password!');
+      }
+
+      // Get user
+      const user = await this.collections.users.findOne({ email });
+
+      if (!user) {
+        return returns.error('User Not Found!');
+      }
+
+      // user password checked
+      const check = bcrypt.compareSync(password, user.password);
+
+      if (check) {
+        const token = random.secret();
+
+        // 200 login
+        this.res.status(200);
+
+        // update user tokens
+        await this.collections.users.findOneAndUpdate({ _id: user._id }, {
+          tokens: user.tokens.concat({
+            token,
+            when: new Date()
+          })
+        }, { new: true });
+
+        return returns.success({
+          userId: user._id,
+          authToken: token
+        });
+      }
+
+      //set status 401 Unauthorized
+      this.res.status(401);
+
+      return returns.error('Unauthorized');
     }
   },
 
   logout: {
-    post({ body }) {
-      return {
-        body
-      };
+    async post() {
+      const { user, token } = this;
+
+      // auth token removed filter.
+      user.tokens = user.tokens.filter((toc) => {
+        return toc.token !== token;
+      });
+
+      // logout user saved.
+      await user.save();
+
+      return returns.success({
+        message: 'User was logout.'
+      });
     }
   }
 };
