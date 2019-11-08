@@ -18,13 +18,17 @@ module.exports = {
 
     endpoints: {
       async post(body) {
-        if (validator.isEmail(body.email)) {
-          const user = await this.collections.users.findOne({
-            email: body.email
-          });
+        const { email, password } = body;
+
+        if (validator.isEmail(email)) {
+          const user = await this.collections.users.findOne({ email });
 
           // User found then
           if (user) {
+
+            // Bad Request
+            this.res.status(400);
+
             return {
               status: 'error',
               data: {
@@ -33,14 +37,56 @@ module.exports = {
             };
           }
 
+          if (validator.isEmpty(password)) {
+
+            // Bad Request
+            this.res.status(400);
+
+            return {
+              status: 'error',
+              data: {
+                message: 'Please enter your password!'
+              }
+            };
+          }
+
+          if (validator.equals(password.toLowerCase(), 'password')) {
+
+            // Bad Request
+            this.res.status(400);
+
+            return {
+              status: 'error',
+              data: {
+                message: 'Password is invalid!'
+              }
+            };
+          }
+
+          if (validator.contains(password.toLowerCase(), 'password')) {
+
+            // Bad Request
+            this.res.status(400);
+            
+            return {
+              status: 'error',
+              data: {
+                message: 'Password should not contain password!'
+              }
+            };
+          }
+
           // User Model
           const doc = new this.model({
-            email: body.email,
+            email,
             password: Bcrypt.hashSync(body.password, 10)
           });
 
           // Save User
           const result = await doc.save();
+
+          // set status 201
+          this.res.status(201);
 
           return {
             status: 'success',
@@ -56,6 +102,12 @@ module.exports = {
           data: {
             message: 'Email Address must be valid'
           }
+        };
+      },
+    
+      get(_id) {
+        return {
+          _id
         };
       }
     }

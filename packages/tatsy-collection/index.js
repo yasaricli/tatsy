@@ -18,7 +18,8 @@ module.exports = (name, options) => {
 
       if (handler) {
         return res.json(await handler.call({
-          collections: Mongo.Collections
+          collections: Mongo.Collections,
+          res
         }));
       }
 
@@ -34,6 +35,7 @@ module.exports = (name, options) => {
       if (handler) {
         return res.json(await handler.call({
           collections: Mongo.Collections,
+          res
         }, _id));
       }
 
@@ -57,6 +59,7 @@ module.exports = (name, options) => {
         return res.json(await handler.call({
           model: Model,
           collections: Mongo.Collections,
+          res
         }, body));
       }
 
@@ -73,7 +76,8 @@ module.exports = (name, options) => {
 
       if (handler) {
         return res.json(await handler.call({
-          collections: Mongo.Collections
+          collections: Mongo.Collections,
+          res
         }, _id, body));
       }
 
@@ -94,6 +98,7 @@ module.exports = (name, options) => {
       if (handler) {
         return res.json(await handler.call({
           collections: Mongo.Collections,
+          res
         }, _id));
       }
 
