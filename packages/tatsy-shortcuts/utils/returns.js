@@ -6,7 +6,7 @@ const _return = (status, data) => {
 };
 
 const success = (data) => {
-  return _return('status', data);
+  return _return('success', data);
 };
 
 const fail = (name) => {

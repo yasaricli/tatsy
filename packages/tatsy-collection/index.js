@@ -1,7 +1,4 @@
-const { middlewares } = require('tatsy-shortcuts');
-
-const { returnJSON, returnSuccess, returnFail } = require('./utils/returns');
-const { apiUrl } = require('./utils/shortcuts');
+const { returns, middlewares, utils } = require('tatsy-shortcuts');
 
 module.exports = (name, options) => {
   const { schema = {}, schemaOptions = {}, transform = (doc, obj) => obj, endpoints = {} } = options;
@@ -16,7 +13,7 @@ module.exports = (name, options) => {
           const list = await Model.find({ });
 
           // return all list.
-          return returnJSON('success', list);
+          return returns.success(list);
         }
       },
 
@@ -29,18 +26,18 @@ module.exports = (name, options) => {
             const doc = await Model.findById(_id);
 
             if (doc) {
-              return returnSuccess(doc);
+              return returns.success(doc);
             }
 
             // set status
             res.status(404);
 
             // error
-            return returnFail(name);
+            return returns.fail(name);
           }
 
-          res.status(500);
-          return returnFail('_id not valid');
+          res.status(400);
+          return returns.error('_id not valid');
         }
       },
 
@@ -53,7 +50,7 @@ module.exports = (name, options) => {
           const data = await doc.save();
 
           // return success
-          return returnSuccess(data);
+          return returns.success(data);
         }
       },
 
@@ -66,16 +63,16 @@ module.exports = (name, options) => {
             const data = await Model.findOneAndUpdate({ _id }, this.bodyParams);
 
             if (data) {
-              return returnSuccess(data);
+              return returns.success(data);
             }
 
             // set status 404
             res.status(404);
-            return returnFail(_id);
+            return returns.fail(_id);
           }
 
-          res.status(500);
-          return returnFail('_id not valid');
+          res.status(400);
+          return returns.error('_id not valid');
         }
       },
 
@@ -88,15 +85,15 @@ module.exports = (name, options) => {
             const data = await Model.findOneAndDelete({ _id });
 
             if (data) {
-              return returnSuccess(data);
+              return returns.success(data);
             }
 
             res.status(404);
-            return returnFail(_id);
+            return returns.fail(_id);
           }
 
-          res.status(500);
-          return returnFail('_id not valid');
+          res.status(400);
+          return returns.error('_id not valid');
         }
       }
     };
@@ -116,7 +113,7 @@ module.exports = (name, options) => {
       const endpoint = handlers[key];
       const middleware = middlewares.authenticate(endpoint.authRequired, Mongo);
 
-      method(apiUrl(url, key), middleware, async (req, res) => {
+      method(utils.endpointUrl(url, key), middleware, async (req, res) => {
         const fn = endpoint.action.bind({
           collections: Mongo.Collections,
           model: Model,

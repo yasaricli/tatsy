@@ -1,4 +1,4 @@
-const apiUrl = (name, type) => {
+const endpointUrl = (name, type) => {
   if (type == 'getAll' || type == 'post') {
     return `/api/${name}`; 
   }
@@ -7,5 +7,5 @@ const apiUrl = (name, type) => {
 };
 
 module.exports = {
-  apiUrl
+  endpointUrl
 };
