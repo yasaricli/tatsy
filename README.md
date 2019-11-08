@@ -81,8 +81,15 @@ inside of the GET endpoint function we can get the actual value of the `_id` fro
 // posts.js | Given a URL "/posts/5"
 Tatsy.Route({
   endpoints: {
-    get(_id) {
-      console.log(_id)
+    get: {
+      authRequired: true, // default false
+      action() {
+        const { _id } = this.urlProps;
+        
+        return {
+          _id
+        }
+      }
     }
   }
 });
