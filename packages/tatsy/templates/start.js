@@ -15,11 +15,11 @@ if (Tatsy.Config.docs) {
 (() => {
   
   // Users register and profile 
-  Tatsy.Collection('users', Tatsy.Auth.Collection)("users", Tatsy);
+  Tatsy.Collection('users', Tatsy.Auth.UsersCollection)("users", Tatsy);
 
   // Login Route (POST, GET)
-  Tatsy.Route({ endpoints: Tatsy.Auth.login })("login", Tatsy);
+  Tatsy.Route(Tatsy.Auth.LoginRoute)("login", Tatsy);
 
   // Logout Route
-  Tatsy.Route({ endpoints: Tatsy.Auth.logout })("logout", Tatsy);
+  Tatsy.Route(Tatsy.Auth.LogoutRoute)("logout", Tatsy);
 })();

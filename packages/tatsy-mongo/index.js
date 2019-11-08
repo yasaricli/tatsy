@@ -5,6 +5,11 @@ const { mongoGlobal } = require('tatsy-logger');
 module.exports = {
   ...mongoose,
 
+  isValidId(id) {
+    const { Types: { ObjectId } } = mongoose;
+    return ObjectId.isValid(id) && (new ObjectId(id)).toString() === id;
+  },
+
   /*
    * All Collections object store.
    */

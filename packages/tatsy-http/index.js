@@ -57,7 +57,7 @@ module.exports = {
   },
   
   parser() {
-    app.use(express.urlencoded({extended: true})); 
+    app.use(express.urlencoded({ extended: true })); 
     app.use(express.json());
   },
 

@@ -4,118 +4,128 @@ const { returnJSON, returnSuccess, returnFail } = require('./utils/returns');
 const { apiUrl } = require('./utils/shortcuts');
 
 module.exports = (name, options) => {
-  const {
-    authRequired = false,
-    schema = {},
-    schemaOptions = {},
-    transform = (doc, obj) => obj,
-    endpoints = {}
-  } = options;
+  const { schema = {}, schemaOptions = {}, transform = (doc, obj) => obj, endpoints = {} } = options;
 
   return (url, { Http, Mongo }) => {
     const Model = Mongo.collection(name, schema, transform, schemaOptions);
-    const auth = middlewares.authenticate(authRequired, Mongo);
 
-    // getAll
-    Http.get(apiUrl(url), auth, async (req, res) => {
-      const handler = endpoints.getAll;
+    const handlers = {
+      getAll: {
+        authRequired: false,
+        async action() {
+          const list = await Model.find({ });
 
-      if (handler) {
-        return res.json(await handler.call({
-          collections: Mongo.Collections,
-          res
-        }));
-      }
-
-      Model.find({ }, (err, list) => {
-        return res.json(returnJSON('success', list));
-      });
-    });
-
-    Http.get(apiUrl(url, '_id'), auth, async (req, res) => {
-      const handler = endpoints.get;
-      const { _id } = req.params;
-
-      if (handler) {
-        return res.json(await handler.call({
-          collections: Mongo.Collections,
-          res
-        }, _id));
-      }
-
-      return Model.findOne({ _id }, (err, doc) => {
-        if (doc) {
-          return res.json(returnSuccess(doc));
+          // return all list.
+          return returnJSON('success', list);
         }
+      },
 
-        return res.status(404).json(returnFail(name));
-      });
+      get: {
+        authRequired: false,
+        async action(req, res) {
+          const { _id } = this.urlParams;
+
+          if (Mongo.isValidId(_id)) {
+            const doc = await Model.findById(_id);
+
+            if (doc) {
+              return returnSuccess(doc);
+            }
+
+            // set status
+            res.status(404);
+
+            // error
+            return returnFail(name);
+          }
+
+          res.status(500);
+          return returnFail('_id not valid');
+        }
+      },
+
+      post: {
+        authRequired: false,
+        async action() {
+          const doc = new Model(this.bodyParams);
+
+          // save data
+          const data = await doc.save();
+
+          // return success
+          return returnSuccess(data);
+        }
+      },
+
+      put: {
+        authRequired: false,
+        async action(req, res) {
+          const { _id } = this.urlParams;
+
+          if (Mongo.isValidId(_id)) {
+            const data = await Model.findOneAndUpdate({ _id }, this.bodyParams);
+
+            if (data) {
+              return returnSuccess(data);
+            }
+
+            // set status 404
+            res.status(404);
+            return returnFail(_id);
+          }
+
+          res.status(500);
+          return returnFail('_id not valid');
+        }
+      },
+
+      delete: {
+        authRequired: false,
+        async action(req, res) {
+          const { _id } = this.urlParams;
+
+          if (Mongo.isValidId(_id)) {
+            const data = await Model.findOneAndDelete({ _id });
+
+            if (data) {
+              return returnSuccess(data);
+            }
+
+            res.status(404);
+            return returnFail(_id);
+          }
+
+          res.status(500);
+          return returnFail('_id not valid');
+        }
+      }
+    };
+
+    Object.keys(endpoints).forEach((key) => {
+      const endpoint = endpoints[key];
+      const handler = handlers[key];
+
+      handlers[key] = {
+        ...handler,
+        ...endpoint,
+      };
     });
 
-    Http.post(apiUrl(url), auth, async (req, res) => {
-      const handler = endpoints.post;
-      const { body } = req;
+    Object.keys(handlers).forEach((key) => {
+      const method = Http[key == 'getAll' ? 'get' : key];
+      const endpoint = handlers[key];
+      const middleware = middlewares.authenticate(endpoint.authRequired, Mongo);
 
-      // create model
-      const doc = new Model(body);
-      
-      if (handler) {
-        return res.json(await handler.call({
+      method(apiUrl(url, key), middleware, async (req, res) => {
+        const fn = endpoint.action.bind({
+          collections: Mongo.Collections,
           model: Model,
-          collections: Mongo.Collections,
-          res
-        }, body));
-      }
+          urlParams: req.params,
+          bodyParams: req.body
+        });
 
-      // save doc
-      return doc.save((err, data) => {
-        return res.json(returnSuccess(data));
+        return res.json(await fn(req, res));
       });
     });
-
-    Http.put(apiUrl(url, '_id'), auth, async (req, res) => {
-      const handler = endpoints.put;
-      const { _id } = req.params;
-      const { body } = req;
-
-      if (handler) {
-        return res.json(await handler.call({
-          collections: Mongo.Collections,
-          res
-        }, _id, body));
-      }
-
-      // update
-      Model.findOneAndUpdate({ _id }, body, (err, data) => {
-        if (data) {
-          return res.json(returnSuccess(data));
-        }
-
-        return res.status(404).json(returnFail(_id));
-      });
-    });
-
-    Http.delete(apiUrl(url, '_id'), auth, async (req, res) => {
-      const handler = endpoints.delete;
-      const { _id } = req.params;
-
-      if (handler) {
-        return res.json(await handler.call({
-          collections: Mongo.Collections,
-          res
-        }, _id));
-      }
-
-      // remove
-      return Model.findOneAndDelete({ _id }, (err, data) => {
-        if (data) {
-          return res.json(returnSuccess(data));
-        }
-
-        return res.status(404).json(returnFail(_id));
-      });
-    });
-  
-    return Model;
   };
 };

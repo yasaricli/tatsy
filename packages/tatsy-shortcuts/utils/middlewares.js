@@ -3,35 +3,39 @@ const { error } = require('./returns');
 const authenticate = (authRequired, { Collections }) => {
   return async (req, res, next) => {
     if (authRequired) {
-      const token = req.header('x-auth-token');
-      const userId = req.header('x-user-id');
 
-      // Get User
-      const user  = await Collections.users.findOne({
-        _id: userId,
-        'tokens.token': token
-      });
+      try {
+        const token = req.header('x-auth-token');
+        const userId = req.header('x-user-id');
+  
+        // Get User
+        const user  = await Collections.users.findOne({
+          _id: userId,
+          'tokens.token': token
+        });
+  
+        if (user) {
+  
+          // set user Response
+          // XXX: require-atomic-updates (race condition)
+          req.user = user;
+          req.token = token;
+  
+          // next handler
+          return next();
+        }
 
-      if (user) {
+        // user not found then
+        throw new Error();
+        
+      } catch(err) {
 
-        // set user Response
-        // XXX: require-atomic-updates (race condition)
-        req.user = user;
-        req.token = token;
+        // set 401 Unauthorized
+        res.status(401);
 
-        // next handler
-        return next();
+        // return error object.
+        return res.json(error('You must be logged in to do this.'));
       }
-
-      // Set Default Empty user
-      // XXX: require-atomic-updates (race condition)
-      req.user = { };
-
-      // set 401 Unauthorized
-      res.status(401);
-
-      // return error object.
-      return res.json(error('You must be logged in to do this.'));
     }
 
     return next();

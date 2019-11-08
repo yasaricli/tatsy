@@ -2,22 +2,23 @@ const { middlewares } = require('tatsy-shortcuts');
 const { apiUrl } = require('./utils/shortcuts');
 
 module.exports = (route) => {
-  const { endpoints = {}, authRequired = false } = route;
+  const { endpoints = {} } = route;
 
   return (url, { Http, Mongo }) => {
     const list = Object.keys(endpoints);
 
     return list.forEach((key) => {
       const fn = Http[key == 'getAll' ? 'get' : key];
-      const auth = middlewares.authenticate(authRequired, Mongo);
+      const { authRequired, action } = endpoints[key];
 
-      if (fn) {
+      if (action) {
+        const auth = middlewares.authenticate(authRequired, Mongo);
+
         fn(apiUrl(url, key), auth, async (req, res) => {
-          const handler = endpoints[key].bind({
+          const handler = action.bind({
             collections: Mongo.Collections,
-            user: req.user,
-            token: req.token,
-            res
+            urlParams: req.params,
+            bodyParams: req.body
           });
 
           return res.json(await handler(req, res));
