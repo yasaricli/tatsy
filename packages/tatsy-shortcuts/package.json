@@ -1,10 +1,9 @@
 {
   "name": "tatsy-shortcuts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "echo 'HOPS: implement me(tatsy-shortcuts)'"
-  },
-  "dependencies": {}
+  }
 }

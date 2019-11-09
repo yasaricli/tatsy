@@ -1,12 +1,12 @@
 {
   "name": "tatsy-route",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "echo 'HOPS: implement me(tatsy-route)'"
   },
   "dependencies": {
-    "tatsy-shortcuts": "^0.0.1"
+    "tatsy-shortcuts": "^0.0.2"
   }
 }
