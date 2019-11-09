@@ -26,7 +26,7 @@ const _getConfigFile = () => {
 };
 
 const CONFIGS = {
-  
+
   // Plugins default empty (tatsy-plugins)
   plugins: [],
 
@@ -36,17 +36,17 @@ const CONFIGS = {
   // active all endpoint list docs
   docs: false,
 
+  // express listen ip
+  bindIp: BIND_IP,
+
   // overwrite previous config.
   ..._getConfigFile(),
 
   // XXX: NOT CHANGED
   // --------- is in read-only mode
-  
+
   // express port
   port: PORT,
-
-  // express listen ip
-  bindIp: BIND_IP,
 
   // Mongodb url and oplog url
   mongoUrl: MONGO_URL,
@@ -54,7 +54,7 @@ const CONFIGS = {
 
   // Production or development
   isProduction: NODE_ENV === 'production',
-  
+
   // Application directories
   appDir: _appAbsolutePath('.'),
   buildDir: _appAbsolutePath('.tatsy'),
