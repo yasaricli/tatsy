@@ -1,14 +1,14 @@
 {
   "name": "tatsy-collection",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "test": "echo 'HOPS: implement me(tatsy-collection)'"
   },
   "dependencies": {
-    "tatsy-http": "^0.0.8",
-    "tatsy-logger": "^0.0.7",
-    "tatsy-shortcuts": "^0.0.2"
+    "tatsy-http": "^0.0.9",
+    "tatsy-logger": "^0.0.8",
+    "tatsy-shortcuts": "^0.0.3"
   }
 }

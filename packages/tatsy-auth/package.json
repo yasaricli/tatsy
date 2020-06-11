@@ -1,6 +1,6 @@
 {
   "name": "tatsy-auth",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "scripts": {
     "test": "echo 'HOPS: implement me(tatsy-auth)'"
@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "tatsy-shortcuts": "^0.0.2",
+    "tatsy-shortcuts": "^0.0.3",
     "validator": "^12.0.0"
   }
 }

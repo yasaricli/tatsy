@@ -1,6 +1,6 @@
 {
   "name": "tatsy-logger",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,6 @@
     "chalk": "^2.4.2",
     "parse-filepath": "^1.0.2",
     "signale": "^1.4.0",
-    "tatsy-config": "^0.0.5"
+    "tatsy-config": "^0.0.6"
   }
 }
