@@ -19,7 +19,10 @@ const _safeFileName = (name) => {
 };
 
 const _getFile = (f) => {
-  return fs.readFileSync(f, 'utf8');
+  const content = fs.readFileSync(f, 'utf8');
+
+  // clear ; last content.
+  return content.replace(/;\s*$/, '');
 };
 
 const _getTemplate = (name, beforeContent) => {
