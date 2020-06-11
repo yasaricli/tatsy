@@ -8,9 +8,6 @@
   <a href="https://tatsy.js.org/"><strong>Website</strong></a> | <a href="https://github.com/tsepeti/tatsy/wiki"><strong>Wiki</strong></a>
 </p>
 
-## Status
-[![CircleCI](https://circleci.com/gh/tsepeti/tatsy/tree/master.svg?style=svg)](https://circleci.com/gh/tsepeti/tatsy/tree/master)
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
