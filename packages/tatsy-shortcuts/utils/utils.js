@@ -6,6 +6,11 @@ const endpointUrl = (name, type) => {
   return `/api/${name}/:_id`; 
 };
 
+const clearSemi = (content) => {
+  return content.replace(/;\s*$/, '');
+};
+
 module.exports = {
-  endpointUrl
+  endpointUrl,
+  clearSemi
 };

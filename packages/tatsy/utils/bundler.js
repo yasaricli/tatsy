@@ -13,16 +13,14 @@ const directoryExists = require('directory-exists');
 const config = require('tatsy-config');
 const logger = require('tatsy-logger');
 const { watcher } = require('tatsy-watcher');
+const { utils } = require('tatsy-shortcuts');
 
 const _safeFileName = (name) => {
   return name.replace('.js', '');
 };
 
 const _getFile = (f) => {
-  const content = fs.readFileSync(f, 'utf8');
-
-  // clear ; last content.
-  return content.replace(/;\s*$/, '');
+  return fs.readFileSync(f, 'utf8');
 };
 
 const _getTemplate = (name, beforeContent) => {
@@ -93,7 +91,7 @@ const _builder = (options) => {
 
       lines.push(`
 (() => {
-  ${content}("${_safeFileName(name)}", Tatsy);
+  ${utils.clearSemi(content)}("${_safeFileName(name)}", Tatsy);
 })();
 `);
     });

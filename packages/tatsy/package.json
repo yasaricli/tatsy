@@ -24,6 +24,7 @@
 		"tatsy-logger": "^0.0.7",
 		"tatsy-mongo": "^0.0.5",
 		"tatsy-route": "^0.0.4",
+		"tatsy-shortcuts": "^0.0.2",
 		"tatsy-watcher": "^0.0.7"
 	}
 }
