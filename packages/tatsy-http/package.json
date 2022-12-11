@@ -7,7 +7,7 @@
     "test": "echo 'HOPS: implement me(tatsy-http)'"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-handlebars": "^3.1.0",
     "express-list-endpoints": "^4.0.1",
     "tatsy-config": "^0.0.6"
