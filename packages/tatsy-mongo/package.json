@@ -7,7 +7,7 @@
     "test": "echo 'HOPS: implement me(tatsy-mongo)'"
   },
   "dependencies": {
-    "mongoose": "^5.7.8",
+    "mongoose": "^6.13.10",
     "tatsy-config": "^0.0.6",
     "tatsy-logger": "^0.0.8"
   }
